@@ -13,6 +13,8 @@ You do not need to download this repository. Open a command window and run the c
 - Mac: open the `Terminal` app.
 - Windows: open `CMD`, `Command Prompt`, or `PowerShell`.
 
+Use the default method first. If it works, you do not need to run the HTTPS method.
+
 Lines that start with `#` are comments, so they are safe to copy too.
 
 ```bash
@@ -23,7 +25,10 @@ codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 codex plugin add fable-mode@codex-fable-mode
 ```
 
-HTTPS form, also one line at a time:
+<details>
+<summary>Only if the default method fails: install with the HTTPS URL</summary>
+
+Use this only if the command above cannot find the repository. You do not need to run both the default method and the HTTPS method.
 
 ```bash
 # 1. Paste this line, then press Enter.
@@ -32,6 +37,8 @@ codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git -
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
 ```
+
+</details>
 
 Check the installation one line at a time:
 

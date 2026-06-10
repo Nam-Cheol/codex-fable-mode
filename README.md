@@ -13,6 +13,8 @@
 - Mac에서는 Spotlight에서 `Terminal`을 검색해 엽니다.
 - Windows에서는 시작 메뉴에서 `CMD`, `명령 프롬프트`, 또는 `PowerShell`을 검색해 엽니다.
 
+아래 기본 방법을 먼저 사용해 주세요. 이 방법으로 설치가 끝나면 HTTPS 방법은 실행하지 않아도 됩니다.
+
 `#`로 시작하는 줄은 설명입니다. 함께 복사해도 실제 실행에는 영향을 주지 않습니다.
 
 ```bash
@@ -23,7 +25,10 @@ codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 codex plugin add fable-mode@codex-fable-mode
 ```
 
-HTTPS 주소로 설치하고 싶다면 아래 명령을 한 줄씩 실행해 주세요.
+<details>
+<summary>기본 방법이 안 될 때만: HTTPS 주소로 설치하기</summary>
+
+위 명령에서 저장소를 찾지 못한다는 오류가 날 때만 아래 방법을 대신 사용하세요. 기본 방법과 HTTPS 방법을 둘 다 실행할 필요는 없습니다.
 
 ```bash
 # 1. 이 줄을 붙여넣고 Enter를 누릅니다.
@@ -32,6 +37,8 @@ codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git -
 # 2. 위 명령이 끝나면, 이 줄을 붙여넣고 Enter를 누릅니다.
 codex plugin add fable-mode@codex-fable-mode
 ```
+
+</details>
 
 설치가 잘 되었는지 확인하려면 아래 명령도 한 줄씩 실행해 보세요.
 
