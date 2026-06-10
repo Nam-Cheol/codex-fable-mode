@@ -1,0 +1,33 @@
+{
+  "name": "fable-mode",
+  "version": "0.1.0",
+  "description": "A documentation-only Codex plugin that adds a reusable skill for careful planning, disciplined tool use, verification-first coding, and concise reporting.",
+  "author": {
+    "name": "Namba"
+  },
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "skill",
+    "workflow",
+    "planning",
+    "code-review",
+    "debugging",
+    "verification",
+    "safety"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Fable Mode",
+    "shortDescription": "Use a careful, verification-first Codex workflow",
+    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for deliberate task framing, disciplined tool use, explicit assumptions, verification-first implementation, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, or telemetry.",
+    "developerName": "Namba",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Guidance"
+    ],
+    "defaultPrompt": [
+      "Use $fable-mode to frame the task, inspect context, plan risky changes, verify assumptions, run relevant checks, and report changes, tests, risks, and assumptions."
+    ]
+  }
+}

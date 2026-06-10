@@ -1,0 +1,20 @@
+{
+  "name": "codex-fable-mode",
+  "interface": {
+    "displayName": "Codex Fable Mode"
+  },
+  "plugins": [
+    {
+      "name": "fable-mode",
+      "source": {
+        "source": "local",
+        "path": "./plugins/fable-mode"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
