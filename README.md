@@ -52,6 +52,15 @@ codex plugin list --marketplace codex-fable-mode
 
 `fable-mode@codex-fable-mode`가 `installed, enabled`로 표시되면 설치가 끝난 것입니다.
 
+### 명령어 설치가 잘 안 될 때
+
+Codex 버전이나 환경에 따라 명령어 설치가 실패할 수 있습니다. 그럴 때는 Codex를 실행한 뒤 `/plugins`를 열어 플러그인 화면에서 설치해 보세요.
+
+1. Codex에서 `/plugins`를 엽니다.
+2. `codex-fable-mode` 마켓플레이스가 보이면 선택합니다.
+3. `Fable Mode` 또는 `fable-mode`를 찾습니다.
+4. `Install plugin`을 눌러 설치합니다.
+
 ## Codex Desktop 설치
 
 Codex Desktop만 쓰더라도 설치는 한 번 명령어 입력창에서 해두는 편이 가장 쉽습니다. 한 번 설치해 두면 다른 Codex 대화에서도 계속 사용할 수 있습니다.
@@ -72,6 +81,8 @@ codex plugin add fable-mode@codex-fable-mode
 5. 선택해서 사용하거나, 메시지에 `$fable-mode`를 직접 입력합니다.
 
 Codex Desktop 버전에 플러그인 설치 메뉴가 있다면, 플러그인 목록 주소로 `Nam-Cheol/codex-fable-mode`를 추가한 뒤 `Fable Mode`를 설치해도 됩니다.
+
+명령어 설치가 실패하면 Codex Desktop에서 `/plugins`를 열고 `codex-fable-mode`를 선택한 다음 `Install plugin`을 눌러 설치해 주세요.
 
 ## 사용 방법
 

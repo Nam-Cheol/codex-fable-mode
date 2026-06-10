@@ -5,6 +5,8 @@
   "author": {
     "name": "Namba"
   },
+  "homepage": "https://github.com/Nam-Cheol/codex-fable-mode",
+  "repository": "https://github.com/Nam-Cheol/codex-fable-mode",
   "license": "MIT",
   "keywords": [
     "codex",

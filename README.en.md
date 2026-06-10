@@ -52,6 +52,15 @@ codex plugin list --marketplace codex-fable-mode
 
 Installation is complete when `fable-mode@codex-fable-mode` appears as `installed, enabled`.
 
+### If Command Installation Fails
+
+Some Codex versions or environments may handle plugin installation through the plugin screen instead. If the command path fails, open Codex and use `/plugins`.
+
+1. Open `/plugins` in Codex.
+2. Select the `codex-fable-mode` marketplace if it appears.
+3. Find `Fable Mode` or `fable-mode`.
+4. Click `Install plugin`.
+
 ## Install With Codex Desktop
 
 If you mainly use Codex Desktop, install the plugin from a command window first, then restart Codex Desktop. Once installed, it is available across Codex conversations.
@@ -72,6 +81,8 @@ codex plugin add fable-mode@codex-fable-mode
 5. Select it from the menu or type `$fable-mode` directly.
 
 If your Codex Desktop version includes a plugin or marketplace UI, you can add `Nam-Cheol/codex-fable-mode` as a marketplace source and then install `Fable Mode` from there.
+
+If command installation fails, open `/plugins` in Codex Desktop, choose `codex-fable-mode`, then click `Install plugin`.
 
 ## Usage
 
