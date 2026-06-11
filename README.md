@@ -29,13 +29,13 @@ UI나 디자인 작업에서는 결과물이 자동으로 웹페이지라고 가
 - Mac에서는 Spotlight에서 `Terminal`을 검색해 엽니다.
 - Windows에서는 시작 메뉴에서 `CMD`, `명령 프롬프트`, 또는 `PowerShell`을 검색해 엽니다.
 
-아래 기본 방법을 먼저 사용해 주세요. 이 방법은 공개 설치용으로 `v0.1.0` 태그에 고정되어 있어, 나중에도 같은 버전을 다시 설치할 수 있습니다. 이 방법으로 설치가 끝나면 HTTPS 방법은 실행하지 않아도 됩니다.
+아래 기본 방법을 먼저 사용해 주세요. 이 방법은 `main`을 따라가므로, 업데이트할 때 현재 권장 문서를 받을 수 있습니다. 이 방법으로 설치가 끝나면 HTTPS 방법은 실행하지 않아도 됩니다.
 
 `#`로 시작하는 줄은 설명입니다. 함께 복사해도 실제 실행에는 영향을 주지 않습니다.
 
 ```bash
 # 1. 이 줄을 붙여넣고 Enter를 누릅니다.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 
 # 2. 위 명령이 끝나면, 이 줄을 붙여넣고 Enter를 누릅니다.
 codex plugin add fable-mode@codex-fable-mode
@@ -48,7 +48,7 @@ codex plugin add fable-mode@codex-fable-mode
 
 ```bash
 # 1. 이 줄을 붙여넣고 Enter를 누릅니다.
-codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git --ref v0.1.0
+codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git --ref main
 
 # 2. 위 명령이 끝나면, 이 줄을 붙여넣고 Enter를 누릅니다.
 codex plugin add fable-mode@codex-fable-mode
@@ -57,13 +57,13 @@ codex plugin add fable-mode@codex-fable-mode
 </details>
 
 <details>
-<summary>최신 개발판(main)으로 설치하기</summary>
+<summary>고정 버전(v0.1.0)으로 설치하기</summary>
 
-계속 개발 중인 최신 내용을 시험해 보고 싶을 때만 `main`을 사용하세요. 일반 설치에는 위의 `v0.1.0` 고정 설치를 권장합니다.
+나중에도 같은 버전을 다시 설치해야 하거나, 팀 문서에서 정확한 버전을 맞춰야 한다면 태그에 고정해서 설치하세요.
 
 ```bash
 # 1. 이 줄을 붙여넣고 Enter를 누릅니다.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
 
 # 2. 위 명령이 끝나면, 이 줄을 붙여넣고 Enter를 누릅니다.
 codex plugin add fable-mode@codex-fable-mode
@@ -101,7 +101,7 @@ Codex Desktop만 쓰더라도 설치는 한 번 명령어 입력창에서 해두
 
 ```bash
 # 1. 이 줄을 붙여넣고 Enter를 누릅니다.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 
 # 2. 위 명령이 끝나면, 이 줄을 붙여넣고 Enter를 누릅니다.
 codex plugin add fable-mode@codex-fable-mode

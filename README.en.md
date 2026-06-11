@@ -33,13 +33,13 @@ You do not need to download this repository. Open a command window and run the c
 - Mac: open the `Terminal` app.
 - Windows: open `CMD`, `Command Prompt`, or `PowerShell`.
 
-Use the default method first. It pins the public install to the `v0.1.0` tag so the installed version is reproducible. If it works, you do not need to run the HTTPS method.
+Use the default method first. It follows `main`, so marketplace upgrades can pull the currently recommended documentation. If it works, you do not need to run the HTTPS method.
 
 Lines that start with `#` are comments, so they are safe to copy too.
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -52,7 +52,7 @@ Use this only if the command above cannot find the repository. You do not need t
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git --ref v0.1.0
+codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git --ref main
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -61,13 +61,13 @@ codex plugin add fable-mode@codex-fable-mode
 </details>
 
 <details>
-<summary>Install the latest development version from main</summary>
+<summary>Install a fixed version: v0.1.0</summary>
 
-Use `main` only when you intentionally want the latest in-development version. For normal installs, prefer the pinned `v0.1.0` command above.
+Use this when you need to reinstall the exact same version later, or when a team document must pin the plugin version.
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -105,7 +105,7 @@ If you mainly use Codex Desktop, install the plugin from a command window first,
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
