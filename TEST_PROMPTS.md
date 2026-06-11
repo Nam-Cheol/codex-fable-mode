@@ -2,6 +2,12 @@
 
 Use these prompts to evaluate whether `fable-mode` routes tasks through the intended domain-neutral guidance.
 
+The suite specifically checks:
+
+- Output Lock: one primary output type is chosen before planning or tool use.
+- Procedure Budget: questions, plans, audit lanes, and verification stay proportional to the locked output.
+- Tool Budget: tools are used for required evidence, change, or touched-surface verification rather than confidence theater.
+
 These are evaluation examples, not built-in domain bias. Domain-specific prompts belong here, not in core routing logic.
 
 Expected behavior is descriptive, not an automated test suite.
@@ -137,7 +143,7 @@ Expected behavior:
 - Avoid claiming a speedup without evidence.
 - Verify correctness after optimization.
 
-## 9. Direct answer lock
+## 9. Output Lock: direct answer
 
 Prompt:
 
@@ -152,7 +158,7 @@ Expected behavior:
 - Do not plan, inspect files, write code, or create examples unless they are needed for the answer.
 - Keep the final response short.
 
-## 10. Procedure budget for a tiny edit
+## 10. Procedure Budget: tiny edit
 
 Prompt:
 
@@ -168,7 +174,7 @@ Expected behavior:
 - Do not turn the label change into a UX rewrite, visual refresh, or component migration.
 - Verify the touched label or explain why it could not be verified.
 
-## 11. Tool budget without confidence theater
+## 11. Tool Budget: no confidence theater
 
 Prompt:
 
