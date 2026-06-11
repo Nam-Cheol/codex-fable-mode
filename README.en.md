@@ -1,5 +1,12 @@
 ![Codex Fable Mode hero](./Codex-Fable-Mode_hero.png)
 
+# Codex Fable Mode
+
+[![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#limitations)
+[![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#install-with-commands)
+[![Version v0.1.1](https://img.shields.io/badge/version-v0.1.1-6b7280)](#version-policy)
+[![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#limitations)
+
 [한국어 README](./README.md)
 
 `fable-mode` is a documentation-only Codex plugin that helps Codex choose only as much reasoning depth as the user's intent requires.
@@ -7,6 +14,37 @@
 It installs one skill only. Users always invoke `$fable-mode`. The skill is not a harness, not a second runtime, and not a rigid spec generator. Simple questions should get direct answers, small fixes should use minimal inspection, bounded implementation should plan-implement-verify, and ambiguous product/design/architecture work should slow down enough to frame intent.
 
 The core idea is an intent-aware depth gate: choose L0, L1, L2, L3, or L4 based on the task instead of forcing every request into the same heavy workflow. Design and substrate selection still matter, but they sit behind that first decision.
+
+[Install with commands](#install-with-commands) · [Install with Codex Desktop](#install-with-codex-desktop) · [Usage](#usage) · [Validation](#manual-validation)
+
+## At a Glance
+
+| When you need | How fable-mode helps |
+| --- | --- |
+| A direct answer | Answer directly without inventing a plan. |
+| A small fix | Inspect the smallest relevant area and patch it. |
+| Bounded implementation | Plan briefly, implement, and verify the result. |
+| Product, design, or architecture work | Classify intent, output shape, and substrate first. |
+| Risky changes | Ask for confirmation and verify more strongly. |
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A["User request"] --> B["Intent framing"]
+    B --> C{"Depth gate"}
+    C -->|L0| D["Direct answer"]
+    C -->|L1| E["Inspect small scope and fix"]
+    C -->|L2| F["Plan -> implement -> verify"]
+    C -->|L3| G["Classify intent/output/substrate"]
+    C -->|L4| H["Confirm + stronger verification"]
+    G --> I["Scoped audit lanes"]
+    H --> I
+    D --> J["Brief report"]
+    E --> J
+    F --> J
+    I --> J
+```
 
 ## What fable-mode is
 

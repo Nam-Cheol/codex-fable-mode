@@ -1,10 +1,48 @@
 ![Codex Fable Mode hero](./Codex-Fable-Mode_hero.png)
 
+# Codex Fable Mode
+
+[![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#한계)
+[![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#명령어로-설치하기-codex-cli)
+[![Version v0.1.1](https://img.shields.io/badge/version-v0.1.1-6b7280)](#버전-운영)
+[![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#한계)
+
 [English README](./README.en.md)
 
 `fable-mode`는 Codex가 사용자의 의도에 맞춰 필요한 만큼만 사고 깊이를 조절하도록 돕는 문서 전용 플러그인입니다.
 
 설치되는 스킬은 하나뿐입니다. 사용자는 항상 `$fable-mode`만 호출하면 됩니다. 이 스킬은 하네스도, 두 번째 런타임도, 딱딱한 spec generator도 아닙니다. 단순 질문은 바로 답하고, 작은 수정은 최소한으로 확인해 고치며, 구현 작업은 계획-구현-검증으로 마무리하고, 모호한 제품/디자인/아키텍처 작업은 더 깊게 의도를 잡습니다.
+
+[명령어로 설치하기](#명령어로-설치하기-codex-cli) · [Codex Desktop 설치](#codex-desktop-설치) · [사용 방법](#사용-방법) · [검증 보기](#수동-검증)
+
+## 빠르게 보기
+
+| 필요한 순간 | fable-mode가 돕는 방식 |
+| --- | --- |
+| 답만 필요한 질문 | 바로 답하고 불필요한 계획을 만들지 않습니다. |
+| 작은 수정 | 가장 작은 관련 범위만 확인하고 고칩니다. |
+| 구현 작업 | 짧게 계획하고, 구현하고, 관련 검증으로 마무리합니다. |
+| 제품/디자인/아키텍처 | 의도, 산출물 형태, 작업 substrate를 먼저 분류합니다. |
+| 위험한 작업 | 확인 질문과 더 강한 검증을 사용합니다. |
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A["사용자 요청"] --> B["Intent framing"]
+    B --> C{"Depth gate"}
+    C -->|L0| D["바로 답변"]
+    C -->|L1| E["작은 범위 확인 후 수정"]
+    C -->|L2| F["계획 -> 구현 -> 검증"]
+    C -->|L3| G["의도/산출물/substrate 분류"]
+    C -->|L4| H["확인 질문 + 강한 검증"]
+    G --> I["Scoped audit lanes"]
+    H --> I
+    D --> J["짧게 보고"]
+    E --> J
+    F --> J
+    I --> J
+```
 
 ## fable-mode란
 
