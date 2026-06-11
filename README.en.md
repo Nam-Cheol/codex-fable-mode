@@ -4,7 +4,7 @@
 
 [![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#limitations)
 [![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#install-with-commands)
-[![Version v0.1.1](https://img.shields.io/badge/version-v0.1.1-6b7280)](#version-policy)
+[![Version v0.2.0](https://img.shields.io/badge/version-v0.2.0-6b7280)](#version-policy)
 [![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#limitations)
 
 [한국어 README](./README.md)
@@ -15,6 +15,8 @@ It installs one skill only. Users always invoke `$fable-mode`. The skill is not 
 
 The core idea is an intent-aware depth gate: choose L0, L1, L2, L3, or L4 based on the task instead of forcing every request into the same heavy workflow. Design and substrate selection still matter, but they sit behind that first decision.
 
+Starting in v0.2.0, fable-mode strengthens task-behavior monitoring rather than specializing in one topic or visual style. It is not a kids, design, or space-specific mode. It checks whether explicit constraints were honored, whether the output form was misread, whether required evidence and tools were used, whether insufficiency was disclosed honestly, whether the reasoning depth fit the task, and whether the final result matches the user's intent.
+
 [Install with commands](#install-with-commands) · [Install with Codex Desktop](#install-with-codex-desktop) · [Usage](#usage) · [Validation](#manual-validation)
 
 ## At a Glance
@@ -24,7 +26,9 @@ The core idea is an intent-aware depth gate: choose L0, L1, L2, L3, or L4 based 
 | A direct answer | Answer directly without inventing a plan. |
 | A small fix | Inspect the smallest relevant area and patch it. |
 | Bounded implementation | Plan briefly, implement, and verify the result. |
-| Product, design, or architecture work | Classify intent, output shape, and substrate first. |
+| Product, design, or architecture work | Classify intent, output shape, grounding, and substrate first. |
+| Ambiguous output form | Separate implementation tools from the actual artifact. |
+| Grounded work | Check whether files, assets, measurements, current facts, or references are needed. |
 | Risky changes | Ask for confirmation and verify more strongly. |
 
 ## Workflow
@@ -33,17 +37,15 @@ The core idea is an intent-aware depth gate: choose L0, L1, L2, L3, or L4 based 
 flowchart LR
     A["User request"] --> B["Intent framing"]
     B --> C{"Depth gate"}
-    C -->|L0| D["Direct answer"]
-    C -->|L1| E["Inspect small scope and fix"]
-    C -->|L2| F["Plan -> implement -> verify"]
-    C -->|L3| G["Classify intent/output/substrate"]
-    C -->|L4| H["Confirm + stronger verification"]
-    G --> I["Scoped audit lanes"]
-    H --> I
-    D --> J["Brief report"]
-    E --> J
-    F --> J
-    I --> J
+    C --> D["Constraint integrity"]
+    D --> E["Ask or act"]
+    E --> F["Output form"]
+    F --> G["Grounding"]
+    G --> H["Capability fit"]
+    H --> I["Audience intent"]
+    I --> J["Audit or substrate when needed"]
+    J --> K["Pre-final critique"]
+    K --> L["Brief report"]
 ```
 
 ## What fable-mode is
@@ -57,10 +59,15 @@ It helps Codex decide how deeply to reason:
 - L2 plan, implement, and verify for bounded implementation
 - L3 intent framing, output archetype, substrate choice, and scoped audit lanes for product/design/architecture work
 - L4 confirmation and stronger verification for risky or hard-to-reverse work
+- constraint integrity for explicit user requirements
+- output-form integrity so familiar implementation tools do not override the requested medium
+- grounding integrity for facts, files, assets, measurements, brand systems, and reproductions
+- capability fit so unavailable tools or evidence are disclosed instead of faked
+- audience intent so the response shape matches the user's target audience when specified
 
 It also uses an ask-or-act rule: ask only when the missing answer would materially change the result. Otherwise, inspect, implement, verify, and report briefly.
 
-For UI and design work, fable-mode does not assume the output is a webpage. It first classifies the output archetype, then chooses the right substrate: DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or hybrid. This helps avoid generic DOM/card implementations for tools that need a different medium, such as pixel editors, drawing tools, graph editors, and slide decks.
+For UI and design work, fable-mode does not assume the output is a webpage. It first checks output form, grounding, and capability fit, then chooses the right substrate: DOM, CSS layout, canvas, SVG, WebGL, fixed-frame, asset-grounded media, or hybrid. This helps avoid generic DOM/card implementations for tools that need a different medium.
 
 This plugin is unofficial, original, and not tied to any provider. It is not affiliated with Anthropic or OpenAI. It does not reproduce or impersonate any company, model, product, private mode, or source document, and it does not include or reproduce any proprietary system prompt. The UI/design guidance is provider-neutral documentation and does not copy or include any source prompt.
 
@@ -99,9 +106,9 @@ codex plugin add fable-mode@codex-fable-mode
 </details>
 
 <details>
-<summary>Install a fixed version: v0.1.0</summary>
+<summary>Example fixed tagged version: v0.1.0</summary>
 
-Use this when you need to reinstall the exact same version later, or when a team document must pin the plugin version.
+Use this when you need to reinstall the exact same version later, or when a team document must pin the plugin version. The example below uses an already tagged version.
 
 ```bash
 # 1. Paste this line, then press Enter.
@@ -169,7 +176,7 @@ Fix the text overflow in this component.
 For longer tasks:
 
 ```text
-/goal Use $fable-mode for this task. Choose the smallest sufficient reasoning depth. For UI/design work, classify the output archetype and substrate before implementation.
+/goal Use $fable-mode for this task. Choose the smallest sufficient reasoning depth. Check constraints, output form, grounding, capability fit, audience intent, and pre-final critique.
 ```
 
 You do not need to repeat `$fable-mode` on every follow-up while the goal remains active. Re-mention it after major topic changes, long compaction-heavy sessions, or if Codex starts ignoring the workflow.
@@ -183,10 +190,18 @@ $fable-mode Diagnose this bug, fix it, and verify it with relevant tests.
 UI and design:
 
 ```text
-$fable-mode Redesign this dashboard around the product goal and compare three directions before implementation.
+$fable-mode Redesign this screen around the product goal and brand constraints. Check output form and grounding before implementation.
+```
+
+Output-form sensitive work:
+
+```text
+$fable-mode This should be an interactive simulator, not a webpage. Even if you use HTML, choose the medium before building it like a dashboard.
 ```
 
 Codex may also use this skill implicitly for planning, code review, architecture, debugging, careful implementation, and UI/frontend design tasks.
+
+Domain-specific prompts live in [TEST_PROMPTS.md](./TEST_PROMPTS.md) as evaluation examples only. They are not built-in bias or core routing logic.
 
 ## Depth Gate: L0-L4
 
@@ -200,18 +215,31 @@ Codex may also use this skill implicitly for planning, code review, architecture
 
 The rule of thumb is to start lower when the cost of being wrong is low, and slow down only when user intent, correctness, or reversibility needs more protection.
 
+Task-behavior monitoring adds a second layer:
+
+- Constraint integrity: extract and verify explicit user requirements as contracts.
+- Output form integrity: separate implementation tools from the requested artifact.
+- Grounding integrity: check whether factual, visual, codebase, brand, performance, or reproduction evidence is required.
+- Capability fit: determine whether the current environment can honestly satisfy the needed evidence and verification.
+- Audience intent: adapt depth, language, evidence, and interaction density when the user names an audience.
+- Pre-final critique: re-check constraints, form, grounding, capability, scope, depth, and intent fit before reporting.
+
 ## Ask-or-Act and Audit Lanes
 
 fable-mode does not ask questions just because a workflow says to ask. It asks when the answer changes the solution, such as destructive work, costly substrate choices, unclear product direction, or high-risk changes.
 
 For review, architecture, product, and high-risk work, it uses scoped audit lanes instead of an all-purpose checklist. That means risk, verification, design quality, safety, or delivery concerns are examined only when they are relevant to the task depth.
 
-## Design Behavior
+## Output Form and Medium
 
-For UI, frontend, and design work, fable-mode does not assume the output is a webpage.
+fable-mode does not assume the output is a webpage.
 
-It first classifies the output archetype:
+It first classifies the output form:
 
+- direct answer
+- document
+- code patch
+- review
 - webpage
 - app screen
 - creative tool
@@ -221,6 +249,9 @@ It first classifies the output archetype:
 - editor
 - dashboard
 - data visualization
+- simulation
+- fixed-frame experience
+- spatial or scene-based experience
 - design exploration
 
 Then it chooses the substrate:
@@ -230,10 +261,17 @@ Then it chooses the substrate:
 - canvas
 - SVG
 - WebGL
-- fixed-stage
+- fixed-frame
+- asset-grounded media
 - hybrid
 
 This reduces generic card/grid implementations for tools that need a real work surface.
+
+## Grounding and Capability Behavior
+
+When the user asks for actual files, current facts, reproducible bugs, measurements, brand constraints, design systems, visual assets, or exact evidence, fable-mode guides Codex not to silently replace that with a plausible approximation.
+
+If the needed capability is available, use it. If the current environment cannot provide the needed evidence or tool, say so. Separate what was verified, what was inferred, what is blocked, and what would be needed for a higher-fidelity result.
 
 ## Manual Validation
 
@@ -282,6 +320,8 @@ codex plugin marketplace remove codex-fable-mode
 
 This is a documentation-only guidance plugin. It does not add tools, hooks, scripts, MCP servers, app integrations, dependencies, postinstall commands, API-calling examples, telemetry, or network behavior. It does not bypass Codex policy, user environment policy, repository instructions, or tool permissions.
 
+fable-mode can guide better decisions, but it cannot invent unavailable runtime tools. If required file access, measurement, browsing, image generation, asset collection, external integrations, or automation tools are unavailable or blocked, it must say so and separate possible work from blocked work.
+
 ## Repository Layout
 
 ```text
@@ -290,11 +330,17 @@ plugins/fable-mode/.codex-plugin/plugin.json
 plugins/fable-mode/skills/fable-mode/SKILL.md
 plugins/fable-mode/skills/fable-mode/references/intent-framing.md
 plugins/fable-mode/skills/fable-mode/references/depth-gate.md
+plugins/fable-mode/skills/fable-mode/references/constraint-integrity.md
 plugins/fable-mode/skills/fable-mode/references/ask-or-act.md
+plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
+plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
+plugins/fable-mode/skills/fable-mode/references/capability-fit.md
+plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
 plugins/fable-mode/skills/fable-mode/references/output-archetype.md
 plugins/fable-mode/skills/fable-mode/references/substrate-selection.md
 plugins/fable-mode/skills/fable-mode/references/small-fix-protocol.md
+plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
 plugins/fable-mode/skills/fable-mode/references/design-thinking.md
 plugins/fable-mode/skills/fable-mode/references/final-response.md
 plugins/fable-mode/skills/fable-mode/references/behavior-model.md
@@ -306,6 +352,7 @@ plugins/fable-mode/skills/fable-mode/references/design-exploration.md
 plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md
 README.md
 README.en.md
+TEST_PROMPTS.md
 VALIDATION.md
 Codex-Fable-Mode_hero.png
 LICENSE

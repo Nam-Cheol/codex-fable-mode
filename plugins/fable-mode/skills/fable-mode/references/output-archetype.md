@@ -1,8 +1,8 @@
 # Output Archetype
 
-Do not confuse implementation format with output archetype.
+Use this as a concrete label set after `output-form-integrity.md`.
 
-HTML, CSS, and JavaScript may be used to build many kinds of artifacts. The artifact is not automatically a webpage.
+Do not confuse implementation format with output archetype. HTML, CSS, and JavaScript may be used to build many kinds of artifacts. The artifact is not automatically a webpage.
 
 ## Common archetypes
 
@@ -17,6 +17,9 @@ HTML, CSS, and JavaScript may be used to build many kinds of artifacts. The arti
 - animation
 - interactive prototype
 - data visualization
+- simulation
+- fixed-frame experience
+- spatial or scene-based experience
 - spatial editor
 - graph editor
 - image/pixel editor
@@ -53,7 +56,8 @@ If the user asks for a deck or presentation, the archetype is fixed-stage conten
 Use a full-viewport stage for:
 
 - games
-- immersive prototypes
+- interactive prototypes that depend on direct manipulation
+- scene-based experiences
 - animation
 - canvas toys
 - visual simulations
@@ -92,3 +96,5 @@ Use a design canvas for:
 - early design exploration
 
 Do not default to webpage structure unless the requested output is actually a webpage.
+
+Do not default to a dashboard, card layout, or side-panel-heavy app structure unless that is the requested output form.

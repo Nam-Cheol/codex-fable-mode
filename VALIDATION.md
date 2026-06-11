@@ -58,12 +58,37 @@ Expected result: the command prints `skill-frontmatter-ok`.
 ```bash
 test -f plugins/fable-mode/skills/fable-mode/SKILL.md
 test -f plugins/fable-mode/skills/fable-mode/references/depth-gate.md
+test -f plugins/fable-mode/skills/fable-mode/references/constraint-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/ask-or-act.md
+test -f plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
+test -f plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
+test -f plugins/fable-mode/skills/fable-mode/references/capability-fit.md
+test -f plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 test -f plugins/fable-mode/skills/fable-mode/references/output-archetype.md
+test -f plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
 test -f plugins/fable-mode/skills/fable-mode/references/substrate-selection.md
+test -f TEST_PROMPTS.md
 ```
 
 Expected result: each command exits successfully.
+
+## Exactly One User-Facing Skill
+
+```bash
+find plugins/fable-mode/skills -mindepth 1 -maxdepth 1 -type d | sort
+```
+
+Expected result: only `plugins/fable-mode/skills/fable-mode` is printed.
+
+## Domain-Neutral Core Routing
+
+```bash
+test ! -f plugins/fable-mode/skills/fable-mode/references/audience-kids.md
+test ! -f plugins/fable-mode/skills/fable-mode/references/immersive-stage.md
+! rg -n "audience-kids|immersive-stage|solar system|dinosaur|animal learning|NASA" plugins/fable-mode/skills/fable-mode README.md README.en.md
+```
+
+Expected result: the deleted files do not exist, and no domain-specific evaluation example appears in core skill or README files.
 
 ## No Runtime Extensions
 
@@ -79,6 +104,12 @@ Expected result: no output.
 test -f plugins/fable-mode/skills/fable-mode/references/intent-framing.md
 test -f plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
 test -f plugins/fable-mode/skills/fable-mode/references/small-fix-protocol.md
+test -f plugins/fable-mode/skills/fable-mode/references/constraint-integrity.md
+test -f plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
+test -f plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
+test -f plugins/fable-mode/skills/fable-mode/references/capability-fit.md
+test -f plugins/fable-mode/skills/fable-mode/references/audience-intent.md
+test -f plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
 test -f plugins/fable-mode/skills/fable-mode/references/design-thinking.md
 test -f plugins/fable-mode/skills/fable-mode/references/final-response.md
 test -f plugins/fable-mode/skills/fable-mode/references/behavior-model.md

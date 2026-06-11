@@ -18,6 +18,7 @@ Before coding substantial UI/design work, produce a short record:
 - Recommended substrate:
 - Rejected alternatives:
 - Reason:
+- Reference/tool needs:
 
 For small tasks, keep this to 3-5 lines.
 For substantial tasks, make it explicit before implementation.
@@ -63,6 +64,13 @@ Use hybrid architecture when:
 - semantic controls and dense visual rendering have different needs
 - accessibility overlays or semantic summaries are needed around a non-DOM visual surface
 
+Use image or asset-grounded media when:
+
+- visual fidelity or source likeness is central to the task
+- the user asks for actual, reference-based, brand-aligned, product-aligned, or visually grounded output
+- the artifact depends on recognizable source material
+- generated images, collected assets, screenshots, source files, or user-provided references are available and policy allows them
+
 ## Default rejection rule
 
 If the design contains a large interactive surface, do not implement it as one DOM node per cell/object unless the object count is tiny and the trade-off is explicitly justified.
@@ -91,3 +99,4 @@ A drawing tool is not a form.
 A slide deck is not a scrolling landing page.
 A graph editor is not a card grid.
 A dense visual surface is not a list of buttons.
+A source-grounded visual result is not automatically a CSS approximation.

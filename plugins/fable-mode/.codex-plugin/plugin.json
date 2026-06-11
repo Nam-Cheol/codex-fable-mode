@@ -1,7 +1,7 @@
 {
   "name": "fable-mode",
-  "version": "0.1.1",
-  "description": "A documentation-only Codex plugin that adds one reusable skill for careful engineering work, integrated design thinking, disciplined tool use, verification-first implementation, and concise reporting.",
+  "version": "0.2.0",
+  "description": "A documentation-only Codex plugin that adds one reusable skill for intent-aware work, constraint integrity, grounding checks, capability fit, verification-first implementation, and concise reporting.",
   "author": {
     "name": "Namba"
   },
@@ -16,6 +16,11 @@
     "code-review",
     "debugging",
     "design-thinking",
+    "constraint-integrity",
+    "output-form",
+    "grounding",
+    "capability-fit",
+    "audience-intent",
     "substrate-selection",
     "frontend",
     "ui",
@@ -25,8 +30,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Fable Mode",
-    "shortDescription": "Use one careful Codex workflow for engineering and UI design",
-    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for deliberate task framing, disciplined tool use, explicit assumptions, engineering implementation, integrated design thinking for UI/frontend work, verification-first delivery, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, dependencies, or telemetry.",
+    "shortDescription": "Use one careful Codex workflow for intent-aware work",
+    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for deliberate task framing, constraint integrity, output-form selection, grounding checks, capability fit, audience-aware response shaping, engineering implementation, verification-first delivery, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, dependencies, or telemetry.",
     "developerName": "Namba",
     "category": "Developer Tools",
     "capabilities": [
@@ -35,7 +40,7 @@
     "defaultPrompt": [
       "Use $fable-mode to choose the right reasoning depth.",
       "Use $fable-mode to fix this without over-scoping.",
-      "Use $fable-mode to classify UI archetype and substrate first."
+      "Use $fable-mode to keep constraints, output form, and grounding honest."
     ]
   }
 }
