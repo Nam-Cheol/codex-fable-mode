@@ -16,6 +16,7 @@
     "code-review",
     "debugging",
     "design-thinking",
+    "substrate-selection",
     "frontend",
     "ui",
     "verification",
@@ -33,7 +34,8 @@
     ],
     "defaultPrompt": [
       "Use $fable-mode to frame the task, inspect context, choose the engineering or design lane, verify assumptions, run relevant checks, and report changes, validation, risks, and assumptions.",
-      "Use $fable-mode to redesign this UI with product-level design thinking. Avoid generic card-grid, border-heavy, badge-heavy, eyebrow-label patterns. Explore three directions before implementation."
+      "Use $fable-mode to redesign this UI with product-level design thinking. Avoid generic card-grid, border-heavy, badge-heavy, eyebrow-label patterns. Explore three directions before implementation.",
+      "Use $fable-mode to design and implement this UI by first choosing the correct substrate: DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or hybrid. Justify the choice before coding."
     ]
   }
 }

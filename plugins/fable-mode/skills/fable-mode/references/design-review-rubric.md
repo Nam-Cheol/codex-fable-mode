@@ -2,6 +2,18 @@
 
 Use this checklist before claiming that UI or design work is complete.
 
+## Substrate Review
+
+- Did the substrate match the product archetype?
+- Did the main interaction surface use the correct primitive?
+- Did we avoid excessive DOM nodes for dense visual data?
+- Did we separate semantic controls from visual rendering surfaces?
+- Would the design work at 2x, 4x, or 10x the current object count?
+- Did we preserve accessibility despite canvas/SVG/WebGL?
+- Did the substrate improve performance, precision, maintainability, or UX?
+- Did we avoid turning creative tools into dashboards?
+- Did we avoid using visual containment as a substitute for interaction design?
+
 ## Purpose
 
 - Is the screen's main job obvious?

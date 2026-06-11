@@ -20,6 +20,23 @@ Fable Mode should avoid common AI-generated UI habits unless they clearly serve 
 - Hierarchy made only through font weight.
 - Center-aligned hero plus three-card layout as the default landing page.
 
+## Implementation Anti-Patterns
+
+- One DOM node per pixel for drawing tools.
+- One button per visual cell when cells are not semantic controls.
+- Card grids used to represent continuous work surfaces.
+- Dashboard panels used for creative tools.
+- Forms and badges used as substitutes for direct manipulation.
+- Slide decks implemented as ordinary scrolling pages.
+- Animations implemented as scattered timers instead of a coherent timeline/state model.
+- Graph editors implemented as nested lists when spatial relationships are primary.
+- SVG used for complex bitmap-like painting.
+- Canvas used for semantic forms or ordinary text-heavy interfaces.
+- DOM grids used for dense, high-frequency visual surfaces.
+- Generic light card layouts replaced with equally generic dark panel layouts.
+
+Do not absolutely ban DOM, cards, grids, borders, SVG, canvas, or gradients. The rule is that each primitive must earn its place based on product domain, interaction, accessibility, scale, and maintainability.
+
 ## Before Using A Card
 
 Ask:

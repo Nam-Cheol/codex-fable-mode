@@ -18,6 +18,35 @@ Explore at least three directions when the task changes:
 
 Small fixes inside an established pattern do not need a full exploration pass.
 
+## Explore Substrate Before Aesthetics
+
+For substantial UI work, compare at least two substrate candidates before choosing a visual direction.
+
+Candidate examples:
+
+- DOM-first.
+- CSS-layout-first.
+- Canvas-first.
+- SVG-first.
+- WebGL-first.
+- Fixed-stage.
+- Hybrid DOM + canvas.
+- Hybrid DOM + SVG.
+- Hybrid DOM + WebGL.
+
+Compare each candidate by:
+
+- Interaction fidelity.
+- Accessibility.
+- Performance.
+- Implementation complexity.
+- Scalability.
+- Product metaphor.
+- Fit with existing codebase.
+- Maintainability.
+
+Choose the substrate first. Then explore visual directions that fit that substrate instead of forcing every product into the same DOM/card/grid model.
+
 ## Required Directions
 
 ### 1. Grounded

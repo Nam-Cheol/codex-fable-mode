@@ -6,6 +6,8 @@
 
 It installs one skill only. Users always invoke `$fable-mode`. Backend, architecture, tests, debugging, refactoring, code review, and repository work use the engineering workflow. UI, frontend, HTML, CSS, React, product screens, dashboards, landing pages, prototypes, design systems, and visual polish use the integrated design-thinking workflow.
 
+For UI and design work, Fable Mode now runs a Substrate Decision Gate before visual styling. It first chooses whether the product should use DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or a hybrid surface. This helps avoid generic DOM/card implementations for tools that need a different medium, such as pixel editors, drawing tools, graph editors, and slide decks. For example, a pixel editor should usually use a canvas work surface plus DOM toolbar, palette, and inspector controls.
+
 This plugin is unofficial, original, and not tied to any provider. It is not affiliated with Anthropic or OpenAI. It does not reproduce or impersonate any company, model, product, private mode, or source document, and it does not include or reproduce any proprietary system prompt. The design workflow is provider-neutral documentation and does not copy or include any source prompt.
 
 ## Install With Commands
@@ -123,6 +125,8 @@ Codex may also use this skill implicitly for planning, code review, architecture
 - State important assumptions and verify them when possible.
 - Choose the engineering workflow or design-thinking workflow based on the task.
 - For UI work, start from product purpose, user state, primary action, information priority, and existing design context.
+- Choose the product archetype and implementation substrate before visual styling or coding.
+- Avoid forcing canvas, SVG, WebGL, fixed-stage, or hybrid products into generic DOM card/grid layouts.
 - Compare grounded, elevated, and divergent directions before meaningful UI changes.
 - Avoid treating common card grids, heavy borders, arbitrary badges, decorative gradients, and repeated eyebrow labels as automatic defaults.
 - Use tools narrowly and share progress during longer work.
@@ -177,6 +181,7 @@ plugins/fable-mode/skills/fable-mode/references/behavior-model.md
 plugins/fable-mode/skills/fable-mode/references/tool-policy.md
 plugins/fable-mode/skills/fable-mode/references/coding-workflow.md
 plugins/fable-mode/skills/fable-mode/references/safety-boundaries.md
+plugins/fable-mode/skills/fable-mode/references/substrate-selection.md
 plugins/fable-mode/skills/fable-mode/references/design-thinking.md
 plugins/fable-mode/skills/fable-mode/references/design-anti-patterns.md
 plugins/fable-mode/skills/fable-mode/references/design-exploration.md

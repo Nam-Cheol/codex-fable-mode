@@ -1,6 +1,6 @@
 # Design Thinking
 
-Design in Fable Mode is product reasoning expressed visually. Treat the screen as an answer to a user situation, not as a collection of components waiting to be arranged.
+Design in Fable Mode is product reasoning expressed through the correct medium. Treat the screen as an answer to a user situation, not as a collection of components waiting to be arranged.
 
 ## Start From The Job
 
@@ -14,17 +14,23 @@ Before producing or changing UI, identify:
 - Fidelity target.
 - Technical, brand, accessibility, and delivery constraints.
 
-Do not start by choosing a component pattern. A component is a consequence of the product model, hierarchy, and interaction need.
+Do not start by choosing a component pattern. The first design question is not "what components do I need?" but "what is the correct interaction surface?" Substrate selection happens before visual direction.
+
+A component is a consequence of the product model, hierarchy, interaction need, and implementation substrate.
 
 ## Use Existing Context First
 
 Existing product context should dominate:
 
+- Existing canvas, SVG, or WebGL usage.
 - Design tokens.
-- Components.
+- Component libraries.
 - Layout primitives.
+- Global styles.
 - Brand rules.
 - Type, spacing, color, and motion conventions.
+- Accessibility conventions.
+- Performance constraints.
 - Screenshots, assets, and prior product surfaces.
 
 Use those signals before inventing new visuals. If the repository already has a visual language, extend it with care instead of replacing it with an unrelated style.
@@ -43,6 +49,16 @@ For substantial UI work, define the system before committing to screens:
 - Motion posture.
 
 When no visual system exists, choose a deliberate aesthetic direction. Avoid generic defaults that could belong to any product.
+
+## Match Medium To Product
+
+A pixel editor is not a dashboard.
+A drawing tool is not a form.
+A slide deck is not a scrolling landing page.
+A graph editor is not a card grid.
+A dense visual surface is not a list of buttons.
+
+The substrate shapes hierarchy, controls, accessibility, and performance. Choose the medium before polishing the look.
 
 ## Compose With Intent
 
