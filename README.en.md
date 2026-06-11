@@ -6,17 +6,21 @@
 
 It installs one skill only. Users always invoke `$fable-mode`. The skill is not a harness, not a second runtime, and not a rigid spec generator. Simple questions should get direct answers, small fixes should use minimal inspection, bounded implementation should plan-implement-verify, and ambiguous product/design/architecture work should slow down enough to frame intent.
 
+The core idea is an intent-aware depth gate: choose L0, L1, L2, L3, or L4 based on the task instead of forcing every request into the same heavy workflow. Design and substrate selection still matter, but they sit behind that first decision.
+
 ## What fable-mode is
 
 fable-mode is a single Codex operating mode for intent-aware work.
 
 It helps Codex decide how deeply to reason:
 
-- direct answer for simple questions
-- minimal inspection for small fixes
-- standard plan, implement, and verify for bounded implementation
-- intent framing and audit lanes for ambiguous product/design/architecture work
-- full caution for high-risk work
+- L0 direct answer for simple questions
+- L1 small-fix path for local bugs, layout issues, and copy changes
+- L2 plan, implement, and verify for bounded implementation
+- L3 intent framing, output archetype, substrate choice, and scoped audit lanes for product/design/architecture work
+- L4 confirmation and stronger verification for risky or hard-to-reverse work
+
+It also uses an ask-or-act rule: ask only when the missing answer would materially change the result. Otherwise, inspect, implement, verify, and report briefly.
 
 For UI and design work, fable-mode does not assume the output is a webpage. It first classifies the output archetype, then chooses the right substrate: DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or hybrid. This helps avoid generic DOM/card implementations for tools that need a different medium, such as pixel editors, drawing tools, graph editors, and slide decks.
 
@@ -29,13 +33,13 @@ You do not need to download this repository. Open a command window and run the c
 - Mac: open the `Terminal` app.
 - Windows: open `CMD`, `Command Prompt`, or `PowerShell`.
 
-Use the default method first. If it works, you do not need to run the HTTPS method.
+Use the default method first. It pins the public install to the `v0.1.0` tag so the installed version is reproducible. If it works, you do not need to run the HTTPS method.
 
 Lines that start with `#` are comments, so they are safe to copy too.
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -48,7 +52,22 @@ Use this only if the command above cannot find the repository. You do not need t
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git --ref main
+codex plugin marketplace add https://github.com/Nam-Cheol/codex-fable-mode.git --ref v0.1.0
+
+# 2. When the first command finishes, paste this line and press Enter.
+codex plugin add fable-mode@codex-fable-mode
+```
+
+</details>
+
+<details>
+<summary>Install the latest development version from main</summary>
+
+Use `main` only when you intentionally want the latest in-development version. For normal installs, prefer the pinned `v0.1.0` command above.
+
+```bash
+# 1. Paste this line, then press Enter.
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -86,7 +105,7 @@ If you mainly use Codex Desktop, install the plugin from a command window first,
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref main
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -131,15 +150,23 @@ $fable-mode Redesign this dashboard around the product goal and compare three di
 
 Codex may also use this skill implicitly for planning, code review, architecture, debugging, careful implementation, and UI/frontend design tasks.
 
-## What It Encourages
+## Depth Gate: L0-L4
 
-`fable-mode` helps Codex avoid treating every task as a heavy project.
+`fable-mode` helps Codex avoid treating every task as a heavy project. The first decision is the smallest sufficient reasoning depth.
 
 - L0: answer simple questions directly.
 - L1: inspect the smallest relevant area for small bugs or CSS issues.
 - L2: plan, implement, and verify ordinary implementation work.
 - L3: classify intent and output format for product, design, or architecture work.
 - L4: use confirmation and stronger verification for risky or hard-to-reverse work.
+
+The rule of thumb is to start lower when the cost of being wrong is low, and slow down only when user intent, correctness, or reversibility needs more protection.
+
+## Ask-or-Act and Audit Lanes
+
+fable-mode does not ask questions just because a workflow says to ask. It asks when the answer changes the solution, such as destructive work, costly substrate choices, unclear product direction, or high-risk changes.
+
+For review, architecture, product, and high-risk work, it uses scoped audit lanes instead of an all-purpose checklist. That means risk, verification, design quality, safety, or delivery concerns are examined only when they are relevant to the task depth.
 
 ## Design Behavior
 
@@ -169,6 +196,10 @@ Then it chooses the substrate:
 - hybrid
 
 This reduces generic card/grid implementations for tools that need a real work surface.
+
+## Manual Validation
+
+This repository is intentionally documentation-only, so it does not add a validation script. [VALIDATION.md](./VALIDATION.md) lists the manual checks for JSON manifests, required skill/reference files, and the absence of hooks, MCP servers, app configs, scripts, dependencies, telemetry, or runtime behavior.
 
 ## Update
 
@@ -231,6 +262,7 @@ plugins/fable-mode/skills/fable-mode/references/design-exploration.md
 plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md
 README.md
 README.en.md
+VALIDATION.md
 Codex-Fable-Mode_hero.png
 LICENSE
 ```

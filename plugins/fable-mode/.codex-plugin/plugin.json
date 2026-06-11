@@ -33,10 +33,10 @@
       "Guidance"
     ],
     "defaultPrompt": [
-      "Use $fable-mode to solve this with intent-aware depth control: answer directly for simple tasks, act minimally for small fixes, and use deeper framing only when the task requires it.",
-      "Use $fable-mode to implement this by first framing the user's intent, choosing the smallest sufficient reasoning depth, and verifying the result with the cheapest relevant check.",
-      "Use $fable-mode to improve this UI by classifying the output archetype and choosing the correct substrate before visual polish.",
-      "Use $fable-mode to debug this issue without over-scoping it: inspect the smallest relevant area, fix the cause, and summarize the verification."
+      "Use $fable-mode to choose the smallest sufficient reasoning depth for this task: answer directly, apply a small-fix path, implement with plan/checks, or use deeper audit only when needed.",
+      "Use $fable-mode to debug this without over-scoping it: inspect the smallest relevant area, fix the cause, verify the specific behavior, and report briefly.",
+      "Use $fable-mode for UI/design work by first classifying the output archetype and substrate, then design or implement without generic card-grid defaults.",
+      "Use $fable-mode to review this change with intent framing, scoped audit lanes, verification evidence, and concise risk reporting."
     ]
   }
 }
