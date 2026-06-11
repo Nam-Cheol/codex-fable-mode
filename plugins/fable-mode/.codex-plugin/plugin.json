@@ -33,9 +33,10 @@
       "Guidance"
     ],
     "defaultPrompt": [
-      "Use $fable-mode to frame the task, inspect context, choose the engineering or design lane, verify assumptions, run relevant checks, and report changes, validation, risks, and assumptions.",
-      "Use $fable-mode to redesign this UI with product-level design thinking. Avoid generic card-grid, border-heavy, badge-heavy, eyebrow-label patterns. Explore three directions before implementation.",
-      "Use $fable-mode to design and implement this UI by first choosing the correct substrate: DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or hybrid. Justify the choice before coding."
+      "Use $fable-mode to solve this with intent-aware depth control: answer directly for simple tasks, act minimally for small fixes, and use deeper framing only when the task requires it.",
+      "Use $fable-mode to implement this by first framing the user's intent, choosing the smallest sufficient reasoning depth, and verifying the result with the cheapest relevant check.",
+      "Use $fable-mode to improve this UI by classifying the output archetype and choosing the correct substrate before visual polish.",
+      "Use $fable-mode to debug this issue without over-scoping it: inspect the smallest relevant area, fix the cause, and summarize the verification."
     ]
   }
 }

@@ -2,13 +2,25 @@
 
 [한국어 README](./README.md)
 
-`fable-mode` is a documentation-only Codex plugin that helps Codex work more deliberately: frame the task, inspect context, plan risky changes, use tools carefully, verify results, and report clearly.
+`fable-mode` is a documentation-only Codex plugin that helps Codex choose only as much reasoning depth as the user's intent requires.
 
-It installs one skill only. Users always invoke `$fable-mode`. Backend, architecture, tests, debugging, refactoring, code review, and repository work use the engineering workflow. UI, frontend, HTML, CSS, React, product screens, dashboards, landing pages, prototypes, design systems, and visual polish use the integrated design-thinking workflow.
+It installs one skill only. Users always invoke `$fable-mode`. The skill is not a harness, not a second runtime, and not a rigid spec generator. Simple questions should get direct answers, small fixes should use minimal inspection, bounded implementation should plan-implement-verify, and ambiguous product/design/architecture work should slow down enough to frame intent.
 
-For UI and design work, Fable Mode now runs a Substrate Decision Gate before visual styling. It first chooses whether the product should use DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or a hybrid surface. This helps avoid generic DOM/card implementations for tools that need a different medium, such as pixel editors, drawing tools, graph editors, and slide decks. For example, a pixel editor should usually use a canvas work surface plus DOM toolbar, palette, and inspector controls.
+## What fable-mode is
 
-This plugin is unofficial, original, and not tied to any provider. It is not affiliated with Anthropic or OpenAI. It does not reproduce or impersonate any company, model, product, private mode, or source document, and it does not include or reproduce any proprietary system prompt. The design workflow is provider-neutral documentation and does not copy or include any source prompt.
+fable-mode is a single Codex operating mode for intent-aware work.
+
+It helps Codex decide how deeply to reason:
+
+- direct answer for simple questions
+- minimal inspection for small fixes
+- standard plan, implement, and verify for bounded implementation
+- intent framing and audit lanes for ambiguous product/design/architecture work
+- full caution for high-risk work
+
+For UI and design work, fable-mode does not assume the output is a webpage. It first classifies the output archetype, then chooses the right substrate: DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or hybrid. This helps avoid generic DOM/card implementations for tools that need a different medium, such as pixel editors, drawing tools, graph editors, and slide decks.
+
+This plugin is unofficial, original, and not tied to any provider. It is not affiliated with Anthropic or OpenAI. It does not reproduce or impersonate any company, model, product, private mode, or source document, and it does not include or reproduce any proprietary system prompt. The UI/design guidance is provider-neutral documentation and does not copy or include any source prompt.
 
 ## Install With Commands
 
@@ -90,22 +102,25 @@ If command installation fails, open `/plugins` in Codex Desktop, choose `codex-f
 
 ## Usage
 
-Explicit invocation:
+For one-off tasks:
 
 ```text
-$fable-mode Review this change and focus on regression risk.
+$fable-mode
+Fix the text overflow in this component.
 ```
 
-Implementation:
+For longer tasks:
+
+```text
+/goal Use $fable-mode for this task. Choose the smallest sufficient reasoning depth. For UI/design work, classify the output archetype and substrate before implementation.
+```
+
+You do not need to repeat `$fable-mode` on every follow-up while the goal remains active. Re-mention it after major topic changes, long compaction-heavy sessions, or if Codex starts ignoring the workflow.
+
+Implementation or debugging:
 
 ```text
 $fable-mode Diagnose this bug, fix it, and verify it with relevant tests.
-```
-
-Planning:
-
-```text
-$fable-mode Before implementing this feature, inspect the structure and identify risky areas.
 ```
 
 UI and design:
@@ -118,21 +133,42 @@ Codex may also use this skill implicitly for planning, code review, architecture
 
 ## What It Encourages
 
-`fable-mode` guides Codex to:
+`fable-mode` helps Codex avoid treating every task as a heavy project.
 
-- Inspect relevant files and state before editing.
-- Make a short plan before risky or broad changes.
-- State important assumptions and verify them when possible.
-- Choose the engineering workflow or design-thinking workflow based on the task.
-- For UI work, start from product purpose, user state, primary action, information priority, and existing design context.
-- Choose the product archetype and implementation substrate before visual styling or coding.
-- Avoid forcing canvas, SVG, WebGL, fixed-stage, or hybrid products into generic DOM card/grid layouts.
-- Compare grounded, elevated, and divergent directions before meaningful UI changes.
-- Avoid treating common card grids, heavy borders, arbitrary badges, decorative gradients, and repeated eyebrow labels as automatic defaults.
-- Use tools narrowly and share progress during longer work.
-- Run relevant tests, lint, builds, or manual checks.
-- Keep hidden reasoning private while sharing concise evidence and rationale.
-- End with a short report covering changes, validation, risks, and assumptions.
+- L0: answer simple questions directly.
+- L1: inspect the smallest relevant area for small bugs or CSS issues.
+- L2: plan, implement, and verify ordinary implementation work.
+- L3: classify intent and output format for product, design, or architecture work.
+- L4: use confirmation and stronger verification for risky or hard-to-reverse work.
+
+## Design Behavior
+
+For UI, frontend, and design work, fable-mode does not assume the output is a webpage.
+
+It first classifies the output archetype:
+
+- webpage
+- app screen
+- creative tool
+- game prototype
+- deck
+- animation
+- editor
+- dashboard
+- data visualization
+- design exploration
+
+Then it chooses the substrate:
+
+- DOM
+- CSS layout
+- canvas
+- SVG
+- WebGL
+- fixed-stage
+- hybrid
+
+This reduces generic card/grid implementations for tools that need a real work surface.
 
 ## Update
 
@@ -177,12 +213,19 @@ This is a documentation-only guidance plugin. It does not add tools, hooks, scri
 .agents/plugins/marketplace.json
 plugins/fable-mode/.codex-plugin/plugin.json
 plugins/fable-mode/skills/fable-mode/SKILL.md
+plugins/fable-mode/skills/fable-mode/references/intent-framing.md
+plugins/fable-mode/skills/fable-mode/references/depth-gate.md
+plugins/fable-mode/skills/fable-mode/references/ask-or-act.md
+plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
+plugins/fable-mode/skills/fable-mode/references/output-archetype.md
+plugins/fable-mode/skills/fable-mode/references/substrate-selection.md
+plugins/fable-mode/skills/fable-mode/references/small-fix-protocol.md
+plugins/fable-mode/skills/fable-mode/references/design-thinking.md
+plugins/fable-mode/skills/fable-mode/references/final-response.md
 plugins/fable-mode/skills/fable-mode/references/behavior-model.md
 plugins/fable-mode/skills/fable-mode/references/tool-policy.md
 plugins/fable-mode/skills/fable-mode/references/coding-workflow.md
 plugins/fable-mode/skills/fable-mode/references/safety-boundaries.md
-plugins/fable-mode/skills/fable-mode/references/substrate-selection.md
-plugins/fable-mode/skills/fable-mode/references/design-thinking.md
 plugins/fable-mode/skills/fable-mode/references/design-anti-patterns.md
 plugins/fable-mode/skills/fable-mode/references/design-exploration.md
 plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md

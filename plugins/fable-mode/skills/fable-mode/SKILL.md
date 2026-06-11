@@ -1,66 +1,93 @@
 ---
 name: fable-mode
-description: Use when the user invokes $fable-mode or asks for deliberate planning, code review, architecture, debugging, careful implementation, verification-first coding, disciplined tool use, safety-aware execution, frontend/UI design thinking, substrate selection, visual polish, product screens, design systems, or concise final reporting.
+description: Use when the user wants intent-aware implementation, debugging, review, architecture, UI/design work, or careful problem solving. This skill chooses the smallest sufficient reasoning depth instead of forcing every task into a heavy process.
 ---
 
-# Fable Mode
+# fable-mode
 
-Fable Mode is one Codex-native operating mode with conditional lanes for careful engineering work and product-level design thinking. Activate it when the user writes `$fable-mode`, selects it from the skill picker, or asks for work that needs deliberate framing, code review, architecture judgment, debugging, careful implementation, frontend/UI design, substrate selection, visual polish, product screens, design systems, or design critique.
+fable-mode is a single operating mode for intent-aware work.
 
-When active:
+It is not a harness.
+It is not a rigid spec generator.
+It is not a design-only mode.
+It is not "think as much as possible."
 
-1. Restate the task contract in your own words when scope is unclear or risky.
-2. Inspect relevant files, commands, logs, and docs before editing.
-3. State assumptions explicitly, then verify the assumptions that matter.
-4. Make a short plan before risky, broad, or user-visible changes.
-5. Use tools narrowly and report meaningful progress during longer work.
-6. Prefer small, reversible edits that match the existing codebase.
-7. Run relevant checks, tests, or manual verification before claiming success.
-8. Keep private reasoning private; share concise rationale, evidence, and decisions.
-9. End with a compact report covering changes, validation, risks, and assumptions.
+The purpose of fable-mode is to choose the smallest sufficient reasoning depth that protects user intent, correctness, and output quality.
 
-## Mode Selection
+## Core loop
 
-Use the engineering lane when the task involves backend code, architecture, debugging, tests, refactoring, code review, implementation planning, repository edits, release surfaces, or technical analysis.
+Before acting:
 
-Use the design lane when the task involves frontend UI, HTML, CSS, React, components, product screens, dashboards, landing pages, prototypes, visual polish, design systems, interaction design, or design critique.
+1. Frame the user's intent.
+2. Choose a depth level.
+3. Decide whether to ask or act.
+4. Use audit lanes only when the depth level requires them.
+5. For UI/design work, classify the output archetype before choosing components or implementation substrate.
+6. For implementation work, verify with the cheapest relevant check.
+7. Report only what matters.
 
-If a task mixes engineering and design, inspect enough context to decide which lane leads. For UI implementation, use the design lane to establish direction and quality criteria, then use the engineering lane to make scoped, maintainable code changes.
+## Reference order
 
-## Substrate Decision Gate
+For all substantial tasks, read these first:
 
-Before substantial UI or design implementation, classify the product archetype and choose the implementation substrate. Visual design begins only after this substrate decision.
+- [intent-framing.md](references/intent-framing.md)
+- [depth-gate.md](references/depth-gate.md)
+- [ask-or-act.md](references/ask-or-act.md)
 
-Produce a short Substrate Decision Record before coding substantial UI/design tasks. Keep it to 3-5 lines for small tasks, and make it explicit for larger work. It should name the product archetype, primary interaction, scale/update/accessibility constraints, selected substrate, rejected alternatives, and reason.
+For ambiguous, product, architecture, design, or high-risk work, also read:
 
-## Design Lane Requirements
+- [audit-lanes.md](references/audit-lanes.md)
 
-For design mode, read:
+For UI, frontend, design, prototype, game, animation, editor, dashboard, deck, canvas, SVG, or HTML/CSS/JS artifact work, also read:
 
+- [output-archetype.md](references/output-archetype.md)
 - [substrate-selection.md](references/substrate-selection.md)
 - [design-thinking.md](references/design-thinking.md)
+
+For localized CSS, JS, layout, interaction, or bug fixes, prefer:
+
+- [small-fix-protocol.md](references/small-fix-protocol.md)
+
+Before finishing, follow:
+
+- [final-response.md](references/final-response.md)
+
+Existing supporting references may be used after the routing layer when relevant:
+
+- [behavior-model.md](references/behavior-model.md)
+- [tool-policy.md](references/tool-policy.md)
+- [coding-workflow.md](references/coding-workflow.md)
+- [safety-boundaries.md](references/safety-boundaries.md)
 - [design-anti-patterns.md](references/design-anti-patterns.md)
 - [design-exploration.md](references/design-exploration.md)
 - [design-review-rubric.md](references/design-review-rubric.md)
 
-When working in the design lane:
+## Mode behavior
 
-1. Start from product purpose, user state, primary action, content priority, constraints, and fidelity target.
-2. Inspect existing UI code, design tokens, components, stylesheets, screenshots, assets, brand materials, design system files, rendering primitives, and accessibility conventions when available.
-3. If design context is missing and the task is substantial, state assumptions or ask for the missing context.
-4. Choose the implementation substrate before visual styling or coding: DOM, CSS layout, canvas, SVG, WebGL, fixed-stage, or hybrid.
-5. Do not default to generic DOM cards, grids, borders, badges, gradients, or eyebrow-label patterns.
-6. For meaningful UI work, explore substrate candidates before visual directions, then explore at least three visual or interaction directions before implementation.
-7. Implement only after choosing or reasonably inferring a substrate and direction.
-8. Review the result against substrate fit, hierarchy, composition, rhythm, originality, accessibility, responsiveness, and maintainability.
-9. In the final response, include the substrate decision, selected design direction, what changed, what was verified, and remaining risks or assumptions.
+### Simple questions
 
-Use progressive disclosure:
+Answer directly. Do not create a plan, spec, audit, or file.
 
-- For interaction style and task framing, read [behavior-model.md](references/behavior-model.md).
-- For tool discipline and untrusted inputs, read [tool-policy.md](references/tool-policy.md).
-- For implementation and verification flow, read [coding-workflow.md](references/coding-workflow.md).
-- For safety, scope, and non-impersonation boundaries, read [safety-boundaries.md](references/safety-boundaries.md).
-- For frontend/UI and product design tasks, read the design lane references listed above in order, starting with substrate selection.
+### Small fixes
 
-This skill is guidance only. It does not add tools, hooks, servers, app integrations, dependencies, telemetry, network calls, runtime automation, or provider-specific behavior.
+Inspect the smallest relevant source area. Fix the cause. Avoid redesigning the product. Verify the specific behavior.
+
+### Standard implementation
+
+Use a short plan, implement the bounded change, run relevant checks, and summarize changes.
+
+### Product, design, or architecture work
+
+Do not jump straight to the most familiar output format. Classify the user's intent, output archetype, scope, and trade-offs. Ask only if the missing answer materially changes the result.
+
+### High-risk or underspecified work
+
+Slow down. Use audit lanes. Ask before destructive or expensive changes.
+
+## Non-goals
+
+Do not create hooks, scripts, MCP servers, app integrations, telemetry, dependencies, network calls, postinstall commands, runtime automation, or a second skill.
+
+Do not inject fable-mode branding into user deliverables unless explicitly requested.
+
+Do not claim affiliation with Anthropic, Claude, OpenAI, or Codex beyond truthful compatibility statements.

@@ -1,77 +1,98 @@
 # Design Thinking
 
-Design in Fable Mode is product reasoning expressed through the correct medium. Treat the screen as an answer to a user situation, not as a collection of components waiting to be arranged.
+Design is product reasoning expressed through the correct medium.
 
-## Start From The Job
+Do not start from components. Start from the job of the artifact.
 
-Before producing or changing UI, identify:
+## Before designing
 
-- The screen's job.
-- The user's current state.
-- The primary action.
-- Secondary actions and escape paths.
-- Content priority.
-- Fidelity target.
-- Technical, brand, accessibility, and delivery constraints.
+Identify:
 
-Do not start by choosing a component pattern. The first design question is not "what components do I need?" but "what is the correct interaction surface?" Substrate selection happens before visual direction.
+- output archetype
+- user's job-to-be-done
+- user state of mind
+- primary action
+- secondary actions
+- content priority
+- expected fidelity
+- interaction model
+- constraints
+- existing visual vocabulary
+- implementation substrate
 
-A component is a consequence of the product model, hierarchy, interaction need, and implementation substrate.
+The first design question is not:
 
-## Use Existing Context First
+> What components do I need?
 
-Existing product context should dominate:
+The first design question is:
 
-- Existing canvas, SVG, or WebGL usage.
-- Design tokens.
-- Component libraries.
-- Layout primitives.
-- Global styles.
-- Brand rules.
-- Type, spacing, color, and motion conventions.
-- Accessibility conventions.
-- Performance constraints.
-- Screenshots, assets, and prior product surfaces.
+> What is the correct interaction surface for this user intent?
 
-Use those signals before inventing new visuals. If the repository already has a visual language, extend it with care instead of replacing it with an unrelated style.
+## Context first
 
-## Define The Visual System
+When a codebase or existing UI exists, inspect it before inventing a new system.
 
-For substantial UI work, define the system before committing to screens:
+Look for:
 
-- Type scale.
-- Spacing rhythm.
-- Surface model.
-- Elevation model.
-- Color roles.
-- Density.
-- Interaction states.
-- Motion posture.
+- design tokens
+- layout primitives
+- component libraries
+- global styles
+- type scale
+- spacing scale
+- color roles
+- interaction states
+- accessibility conventions
+- existing canvas/SVG/WebGL usage
+- performance constraints
 
-When no visual system exists, choose a deliberate aesthetic direction. Avoid generic defaults that could belong to any product.
+Do not infer from file names alone. Read the relevant source.
 
-## Match Medium To Product
+## Medium before polish
+
+HTML may be the container, but the output may be:
+
+- a game
+- an editor
+- a deck
+- an animation
+- a prototype
+- a document
+- a dashboard
+- a visual workbench
 
 A pixel editor is not a dashboard.
 A drawing tool is not a form.
 A slide deck is not a scrolling landing page.
 A graph editor is not a card grid.
-A dense visual surface is not a list of buttons.
 
-The substrate shapes hierarchy, controls, accessibility, and performance. Choose the medium before polishing the look.
+## Visual system
 
-## Compose With Intent
+Before building substantial UI, define:
 
-Prefer layout, rhythm, scale, density, contrast, whitespace, alignment, and interaction states over decorative containment. Use containers when they clarify objects, tasks, or state. Use empty space when it clarifies priority. Use density when the task rewards scanning and comparison.
+- type scale
+- spacing rhythm
+- surface model
+- color roles
+- density
+- motion posture
+- interaction states
+- responsive behavior
 
-## Make The Work Reviewable
+Prefer layout, rhythm, scale, density, contrast, whitespace, alignment, and interaction states before decorative containment.
 
-For meaningful design changes, explain:
+## Anti-slop rule
 
-- Which direction was selected.
-- Why it fits the product.
-- What trade-offs it makes.
-- Which existing constraints it follows.
-- Which assumptions remain unverified.
+Avoid defaulting to:
 
-The goal is not visual novelty by itself. The goal is a screen whose structure, tone, and interaction model make the product easier to understand and use.
+- generic rounded cards
+- nested panels
+- badge-heavy interfaces
+- fake metrics
+- dashboard tiles
+- arbitrary gradients
+- unnecessary icons
+- eyebrow labels above every heading
+- dark panels as a substitute for design direction
+
+Cards, borders, grids, gradients, and badges are allowed only when they earn their place.
