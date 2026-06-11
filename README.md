@@ -189,6 +189,12 @@ UI, frontend, design 작업에서 fable-mode는 결과물을 자동으로 webpag
 
 이 저장소는 문서 전용 플러그인이라 검증용 런타임 스크립트를 따로 추가하지 않습니다. 대신 [VALIDATION.md](./VALIDATION.md)에 manifest JSON 확인, 필수 skill/reference 파일 확인, hooks/MCP/app 설정이 없다는 확인 절차를 적어 두었습니다.
 
+## 버전 운영
+
+기본 설치는 `--ref main`을 사용합니다. 이 플러그인은 실행 코드가 아니라 현재 권장 사고 워크플로 문서이므로, 일반 사용자는 업데이트할 때 최신 문서를 받는 편이 자연스럽습니다.
+
+팀 문서나 재현 가능한 설치가 필요하면 `--ref v0.1.x`처럼 태그에 고정하세요. 짧은 문구 수정은 `plugin.json.version`을 유지할 수 있지만, 기본 동작 철학, reference 구조, 설치 방식, UI metadata가 바뀌면 patch 또는 minor version을 올립니다.
+
 ## 업데이트
 
 새 버전이 나왔을 때는 아래 명령을 한 줄씩 실행해 주세요.

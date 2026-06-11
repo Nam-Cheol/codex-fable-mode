@@ -201,6 +201,12 @@ This reduces generic card/grid implementations for tools that need a real work s
 
 This repository is intentionally documentation-only, so it does not add a validation script. [VALIDATION.md](./VALIDATION.md) lists the manual checks for JSON manifests, required skill/reference files, and the absence of hooks, MCP servers, app configs, scripts, dependencies, telemetry, or runtime behavior.
 
+## Version Policy
+
+The default install uses `--ref main`. This plugin is not runtime code; it is the currently recommended reasoning workflow documentation, so most users should receive the latest guidance when they upgrade.
+
+For team docs or reproducible installs, pin a tag such as `--ref v0.1.x`. Small wording edits may keep the same `plugin.json.version`, but changes to the default behavior philosophy, reference structure, install flow, or UI metadata should bump the patch or minor version.
+
 ## Update
 
 When a new version is available, run each command on its own line:

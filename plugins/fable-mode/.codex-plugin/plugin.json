@@ -1,6 +1,6 @@
 {
   "name": "fable-mode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A documentation-only Codex plugin that adds one reusable skill for careful engineering work, integrated design thinking, disciplined tool use, verification-first implementation, and concise reporting.",
   "author": {
     "name": "Namba"
@@ -33,10 +33,9 @@
       "Guidance"
     ],
     "defaultPrompt": [
-      "Use $fable-mode to choose the smallest sufficient reasoning depth for this task: answer directly, apply a small-fix path, implement with plan/checks, or use deeper audit only when needed.",
-      "Use $fable-mode to debug this without over-scoping it: inspect the smallest relevant area, fix the cause, verify the specific behavior, and report briefly.",
-      "Use $fable-mode for UI/design work by first classifying the output archetype and substrate, then design or implement without generic card-grid defaults.",
-      "Use $fable-mode to review this change with intent framing, scoped audit lanes, verification evidence, and concise risk reporting."
+      "Use $fable-mode to choose the right reasoning depth.",
+      "Use $fable-mode to fix this without over-scoping.",
+      "Use $fable-mode to classify UI archetype and substrate first."
     ]
   }
 }

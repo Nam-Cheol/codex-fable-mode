@@ -13,6 +13,46 @@ python3 -m json.tool plugins/fable-mode/.codex-plugin/plugin.json >/dev/null
 
 Expected result: both commands exit successfully and print no output.
 
+## Starter Prompt Limits
+
+```bash
+python3 - <<'PY'
+import json
+
+p = "plugins/fable-mode/.codex-plugin/plugin.json"
+with open(p, encoding="utf-8") as f:
+    data = json.load(f)
+
+prompts = data["interface"].get("defaultPrompt", [])
+assert len(prompts) <= 3, "defaultPrompt must contain at most 3 entries"
+for i, prompt in enumerate(prompts, 1):
+    assert len(prompt) <= 128, f"defaultPrompt #{i} is over 128 chars"
+print("defaultPrompt-ok")
+PY
+```
+
+Expected result: the command prints `defaultPrompt-ok`.
+
+## Skill Frontmatter
+
+```bash
+python3 - <<'PY'
+p = "plugins/fable-mode/skills/fable-mode/SKILL.md"
+with open(p, encoding="utf-8") as f:
+    text = f.read()
+
+assert text.startswith("---\n"), "SKILL.md must start with YAML frontmatter"
+end = text.find("\n---", 4)
+assert end != -1, "SKILL.md frontmatter must be closed"
+frontmatter = text[4:end]
+assert "\nname: fable-mode\n" in "\n" + frontmatter + "\n", "frontmatter name is missing"
+assert "\ndescription: " in "\n" + frontmatter + "\n", "frontmatter description is missing"
+print("skill-frontmatter-ok")
+PY
+```
+
+Expected result: the command prints `skill-frontmatter-ok`.
+
 ## Required Skill Files
 
 ```bash
