@@ -4,7 +4,9 @@
 
 `fable-mode` is a documentation-only Codex plugin that helps Codex work more deliberately: frame the task, inspect context, plan risky changes, use tools carefully, verify results, and report clearly.
 
-This plugin is unofficial, original, and not tied to any provider. It is not affiliated with Anthropic or OpenAI. It does not reproduce or impersonate any company, model, product, private mode, or source document, and it does not include or reproduce any proprietary system prompt.
+It installs one skill only. Users always invoke `$fable-mode`. Backend, architecture, tests, debugging, refactoring, code review, and repository work use the engineering workflow. UI, frontend, HTML, CSS, React, product screens, dashboards, landing pages, prototypes, design systems, and visual polish use the integrated design-thinking workflow.
+
+This plugin is unofficial, original, and not tied to any provider. It is not affiliated with Anthropic or OpenAI. It does not reproduce or impersonate any company, model, product, private mode, or source document, and it does not include or reproduce any proprietary system prompt. The design workflow is provider-neutral documentation and does not copy or include any source prompt.
 
 ## Install With Commands
 
@@ -104,7 +106,13 @@ Planning:
 $fable-mode Before implementing this feature, inspect the structure and identify risky areas.
 ```
 
-Codex may also use this skill implicitly for planning, code review, architecture, debugging, or careful implementation tasks.
+UI and design:
+
+```text
+$fable-mode Redesign this dashboard around the product goal and compare three directions before implementation.
+```
+
+Codex may also use this skill implicitly for planning, code review, architecture, debugging, careful implementation, and UI/frontend design tasks.
 
 ## What It Encourages
 
@@ -113,6 +121,10 @@ Codex may also use this skill implicitly for planning, code review, architecture
 - Inspect relevant files and state before editing.
 - Make a short plan before risky or broad changes.
 - State important assumptions and verify them when possible.
+- Choose the engineering workflow or design-thinking workflow based on the task.
+- For UI work, start from product purpose, user state, primary action, information priority, and existing design context.
+- Compare grounded, elevated, and divergent directions before meaningful UI changes.
+- Avoid treating common card grids, heavy borders, arbitrary badges, decorative gradients, and repeated eyebrow labels as automatic defaults.
 - Use tools narrowly and share progress during longer work.
 - Run relevant tests, lint, builds, or manual checks.
 - Keep hidden reasoning private while sharing concise evidence and rationale.
@@ -153,7 +165,7 @@ codex plugin marketplace remove codex-fable-mode
 
 ## Limitations
 
-This is a documentation-only guidance plugin. It does not add tools, hooks, scripts, MCP servers, app integrations, dependencies, telemetry, or network behavior. It does not bypass Codex policy, user environment policy, repository instructions, or tool permissions.
+This is a documentation-only guidance plugin. It does not add tools, hooks, scripts, MCP servers, app integrations, dependencies, postinstall commands, API-calling examples, telemetry, or network behavior. It does not bypass Codex policy, user environment policy, repository instructions, or tool permissions.
 
 ## Repository Layout
 
@@ -165,6 +177,10 @@ plugins/fable-mode/skills/fable-mode/references/behavior-model.md
 plugins/fable-mode/skills/fable-mode/references/tool-policy.md
 plugins/fable-mode/skills/fable-mode/references/coding-workflow.md
 plugins/fable-mode/skills/fable-mode/references/safety-boundaries.md
+plugins/fable-mode/skills/fable-mode/references/design-thinking.md
+plugins/fable-mode/skills/fable-mode/references/design-anti-patterns.md
+plugins/fable-mode/skills/fable-mode/references/design-exploration.md
+plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md
 README.md
 README.en.md
 Codex-Fable-Mode_hero.png

@@ -1,11 +1,11 @@
 ---
 name: fable-mode
-description: Use when the user invokes $fable-mode or asks for deliberate planning, code review, architecture, debugging, careful implementation, verification-first coding, disciplined tool use, safety-aware execution, or concise final reporting.
+description: Use when the user invokes $fable-mode or asks for deliberate planning, code review, architecture, debugging, careful implementation, verification-first coding, disciplined tool use, safety-aware execution, frontend/UI design thinking, visual polish, product screens, design systems, or concise final reporting.
 ---
 
 # Fable Mode
 
-Fable Mode is a Codex-native workflow skill for careful engineering work. Activate it when the user writes `$fable-mode`, selects it from the skill picker, or asks for work that needs deliberate framing, code review, architecture judgment, debugging, or careful implementation.
+Fable Mode is one Codex-native operating mode with conditional lanes for careful engineering work and product-level design thinking. Activate it when the user writes `$fable-mode`, selects it from the skill picker, or asks for work that needs deliberate framing, code review, architecture judgment, debugging, careful implementation, frontend/UI design, visual polish, product screens, design systems, or design critique.
 
 When active:
 
@@ -19,11 +19,40 @@ When active:
 8. Keep private reasoning private; share concise rationale, evidence, and decisions.
 9. End with a compact report covering changes, validation, risks, and assumptions.
 
+## Mode Selection
+
+Use the engineering lane when the task involves backend code, architecture, debugging, tests, refactoring, code review, implementation planning, repository edits, release surfaces, or technical analysis.
+
+Use the design lane when the task involves frontend UI, HTML, CSS, React, components, product screens, dashboards, landing pages, prototypes, visual polish, design systems, interaction design, or design critique.
+
+If a task mixes engineering and design, inspect enough context to decide which lane leads. For UI implementation, use the design lane to establish direction and quality criteria, then use the engineering lane to make scoped, maintainable code changes.
+
+## Design Lane Requirements
+
+For design mode, read:
+
+- [design-thinking.md](references/design-thinking.md)
+- [design-anti-patterns.md](references/design-anti-patterns.md)
+- [design-exploration.md](references/design-exploration.md)
+- [design-review-rubric.md](references/design-review-rubric.md)
+
+When working in the design lane:
+
+1. Start from product purpose, user state, primary action, content priority, constraints, and fidelity target.
+2. Inspect existing UI code, design tokens, components, stylesheets, screenshots, assets, brand materials, or design system files when available.
+3. If design context is missing and the task is substantial, state assumptions or ask for the missing context.
+4. Do not default to generic cards, grids, borders, badges, gradients, or eyebrow-label patterns.
+5. For meaningful UI work, explore at least three visual or interaction directions before implementation.
+6. Implement only after choosing or reasonably inferring a direction.
+7. Review the result against hierarchy, composition, rhythm, originality, accessibility, responsiveness, and maintainability.
+8. In the final response, include the selected design direction, what changed, what was verified, and remaining risks or assumptions.
+
 Use progressive disclosure:
 
 - For interaction style and task framing, read [behavior-model.md](references/behavior-model.md).
 - For tool discipline and untrusted inputs, read [tool-policy.md](references/tool-policy.md).
 - For implementation and verification flow, read [coding-workflow.md](references/coding-workflow.md).
 - For safety, scope, and non-impersonation boundaries, read [safety-boundaries.md](references/safety-boundaries.md).
+- For frontend/UI and product design tasks, read the design lane references listed above.
 
-This skill is guidance only. It does not add tools, hooks, servers, app integrations, dependencies, telemetry, network calls, or provider-specific behavior.
+This skill is guidance only. It does not add tools, hooks, servers, app integrations, dependencies, telemetry, network calls, runtime automation, or provider-specific behavior.
