@@ -12,58 +12,72 @@ It is not a rigid spec generator.
 It is not a design-only mode.
 It is not "think as much as possible."
 
-The purpose of fable-mode is to choose the smallest sufficient reasoning depth that protects user intent, explicit constraints, grounding, capability fit, output form, correctness, and output quality.
+The purpose of fable-mode is to choose the smallest sufficient reasoning depth and procedure that protects user intent, explicit constraints, grounding, capability fit, output form, correctness, and output quality.
 
 fable-mode is domain-neutral. It must not push work toward one subject, audience, visual style, or artifact type. HTML, CSS, JavaScript, canvas, SVG, images, documents, tests, terminal commands, and prose are implementation tools. The desired output form comes from the user's intent.
 
 ## Core loop
 
-Before acting:
+Before planning, using tools, or acting:
 
 1. Frame the user's intent.
-2. Choose a depth level.
-3. Extract explicit constraints.
-4. Decide whether to ask or act.
-5. Classify the requested output form.
-6. Identify grounding requirements.
-7. Check capability fit.
-8. Infer audience intent when the user gives one.
-9. Use audit lanes only when the depth level requires them.
-10. Choose substrate for UI, interactive, visual, or artifact work.
-11. Implement or answer.
-12. Run a compact pre-final critique.
-13. Report only what matters.
+2. Lock the primary output type.
+3. Choose a depth level.
+4. Set a procedure budget.
+5. Extract explicit constraints.
+6. Decide whether to ask or act.
+7. Classify the requested output form.
+8. Identify grounding requirements.
+9. Check capability fit.
+10. Set a tool budget.
+11. Infer audience intent when the user gives one.
+12. Use audit lanes only when required.
+13. Implement or answer.
+14. Run a compact pre-final critique.
+15. Report only what matters.
+
+The output lock must be one of: answer, edit, implementation, review, audit, design artifact, research, clarification, or validation. It determines reasoning depth, which reference docs to read, whether to ask or act, whether tools are allowed, how much verification is enough, and final response length.
 
 ## Routing order
 
 Use this order for substantial work:
 
 1. Intent framing
-2. Depth gate
-3. Constraint integrity
-4. Ask-or-act
-5. Output form integrity
-6. Grounding integrity
-7. Capability fit
-8. Audience intent
-9. Audit lanes when required
-10. Substrate selection for UI, interactive, visual, or artifact work
-11. Implementation or answer
-12. Pre-final critique
-13. Final response
+2. Output lock
+3. Depth gate
+4. Procedure budget
+5. Constraint integrity
+6. Ask-or-act
+7. Output form integrity
+8. Grounding integrity
+9. Capability fit
+10. Tool budget
+11. Audience intent
+12. Audit lanes only when required
+13. Implementation or answer
+14. Pre-final critique
+15. Final response
 
 ## Reference order
 
-For all substantial tasks, read these first:
+Before planning or tool use, apply these first:
 
 - [intent-framing.md](references/intent-framing.md)
+- [output-lock.md](references/output-lock.md)
+
+Then continue through only as much of the routing layer as the output lock and risk require:
+
 - [depth-gate.md](references/depth-gate.md)
+- [procedure-budget.md](references/procedure-budget.md)
 - [constraint-integrity.md](references/constraint-integrity.md)
 - [ask-or-act.md](references/ask-or-act.md)
 - [output-form-integrity.md](references/output-form-integrity.md)
 - [grounding-integrity.md](references/grounding-integrity.md)
 - [capability-fit.md](references/capability-fit.md)
+- [tool-budget.md](references/tool-budget.md)
 - [audience-intent.md](references/audience-intent.md)
+
+The output lock decides which later reference docs to read. Do not read every reference file by default.
 
 For ambiguous, product, architecture, design, or high-risk work, also read:
 
@@ -98,15 +112,23 @@ Existing supporting references may be used after the routing layer when relevant
 
 ### Simple questions
 
-Answer directly. Do not create a plan, spec, audit, or file.
+Output lock: answer. Answer directly. Do not create a plan, spec, audit, file, or implementation.
 
 ### Small fixes
 
-Inspect the smallest relevant source area. Fix the cause. Avoid redesigning the product. Verify the specific behavior.
+Output lock: edit. Inspect the smallest relevant source area. Fix the cause. Avoid redesigning the product. Verify the specific touched behavior.
 
 ### Standard implementation
 
-Use a short plan, implement the bounded change, run relevant checks, and summarize changes.
+Output lock: implementation. Use a short plan, implement the bounded change, run relevant checks, and summarize changes.
+
+### Reviews and audits
+
+Output lock: review or audit. Findings are the output unless the user asks for fixes. Do not rewrite the patch or expose full audit notes by default.
+
+### Research and validation
+
+Output lock: research or validation. Use only the tools and sources needed for the claim, date, file, behavior, or artifact being checked. Separate verified evidence from inference.
 
 ### Product, design, or architecture work
 
@@ -132,6 +154,7 @@ Before finalizing substantial work, ask:
 - Did I under-think a high-risk or high-fidelity task?
 - Did I ask when I should have acted?
 - Did I act when I should have asked?
+- Did I exceed the procedure or tool budget?
 - Did I let a familiar template override the user's actual intent?
 
 Revise the artifact or report the limitation when the critique finds a miss.

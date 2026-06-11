@@ -9,13 +9,13 @@
 
 [한국어 README](./README.md)
 
-`fable-mode` is a documentation-only Codex plugin that helps Codex choose only as much reasoning depth as the user's intent requires.
+`fable-mode` is a documentation-only Codex plugin that helps Codex lock the requested output type, reasoning depth, procedure, and tool use before doing only as much work as the user's intent requires.
 
 It installs one skill only. Users always invoke `$fable-mode`. The skill is not a harness, not a second runtime, and not a rigid spec generator. Simple questions should get direct answers, small fixes should use minimal inspection, bounded implementation should plan-implement-verify, and ambiguous product/design/architecture work should slow down enough to frame intent.
 
-The core idea is an intent-aware depth gate: choose L0, L1, L2, L3, or L4 based on the task instead of forcing every request into the same heavy workflow. Design and substrate selection still matter, but they sit behind that first decision.
+The core idea is an intent-aware output lock: first lock the primary output as answer, edit, implementation, review, audit, design artifact, research, clarification, or validation. Then choose the smallest sufficient reasoning depth, procedure budget, and tool budget for that lock.
 
-Starting in v0.2.0, fable-mode strengthens task-behavior monitoring rather than specializing in one topic or visual style. It is not a kids, design, or space-specific mode. It checks whether explicit constraints were honored, whether the output form was misread, whether required evidence and tools were used, whether insufficiency was disclosed honestly, whether the reasoning depth fit the task, and whether the final result matches the user's intent.
+fable-mode strengthens task-behavior monitoring rather than specializing in one topic or visual style. It is not a kids, design, or space-specific mode. It checks whether explicit constraints were honored, whether the output form was misread, whether required evidence and tools were used, whether insufficiency was disclosed honestly, whether the reasoning depth fit the task, and whether the final result matches the user's intent.
 
 [Install with commands](#install-with-commands) · [Install with Codex Desktop](#install-with-codex-desktop) · [Usage](#usage) · [Validation](#manual-validation)
 
@@ -26,6 +26,9 @@ Starting in v0.2.0, fable-mode strengthens task-behavior monitoring rather than 
 | A direct answer | Answer directly without inventing a plan. |
 | A small fix | Inspect the smallest relevant area and patch it. |
 | Bounded implementation | Plan briefly, implement, and verify the result. |
+| Output drift | Use Output Lock to choose answer, edit, implementation, review, audit, design artifact, research, clarification, or validation before acting. |
+| Process bloat | Use Procedure Budget to cap questions, plans, audit lanes, and verification. |
+| Tool bloat | Use Tool Budget so tools gather evidence, make changes, or verify the touched surface rather than perform confidence theater. |
 | Product, design, or architecture work | Classify intent, output shape, grounding, and substrate first. |
 | Ambiguous output form | Separate implementation tools from the actual artifact. |
 | Grounded work | Check whether files, assets, measurements, current facts, or references are needed. |
@@ -36,16 +39,17 @@ Starting in v0.2.0, fable-mode strengthens task-behavior monitoring rather than 
 ```mermaid
 flowchart LR
     A["User request"] --> B["Intent framing"]
-    B --> C{"Depth gate"}
-    C --> D["Constraint integrity"]
-    D --> E["Ask or act"]
-    E --> F["Output form"]
-    F --> G["Grounding"]
-    G --> H["Capability fit"]
-    H --> I["Audience intent"]
-    I --> J["Audit or substrate when needed"]
-    J --> K["Pre-final critique"]
-    K --> L["Brief report"]
+    B --> C["Output Lock"]
+    C --> D{"Depth gate"}
+    D --> E["Procedure budget"]
+    E --> F["Constraints"]
+    F --> G["Ask or act"]
+    G --> H["Grounding and capability"]
+    H --> I["Tool budget"]
+    I --> J["Audit only if required"]
+    J --> K["Implement or answer"]
+    K --> L["Pre-final critique"]
+    L --> M["Brief report"]
 ```
 
 ## What fable-mode is
@@ -54,6 +58,9 @@ fable-mode is a single Codex operating mode for intent-aware work.
 
 It helps Codex decide how deeply to reason:
 
+- output lock for answer, edit, implementation, review, audit, design artifact, research, clarification, or validation
+- procedure budget so direct answers do not become implementation projects and small fixes do not become redesigns
+- tool budget so tools are used for evidence, change, and touched-surface verification, not confidence theater
 - L0 direct answer for simple questions
 - L1 small-fix path for local bugs, layout issues, and copy changes
 - L2 plan, implement, and verify for bounded implementation
@@ -203,9 +210,43 @@ Codex may also use this skill implicitly for planning, code review, architecture
 
 Domain-specific prompts live in [TEST_PROMPTS.md](./TEST_PROMPTS.md) as evaluation examples only. They are not built-in bias or core routing logic.
 
+## Output Lock and Budgets
+
+`fable-mode` helps Codex avoid treating every task as a heavy project. The first decision is the primary output lock:
+
+- answer
+- edit
+- implementation
+- review
+- audit
+- design artifact
+- research
+- clarification
+- validation
+
+The output lock determines reasoning depth, which references to read, whether to ask or act, whether tools are allowed, how much verification is enough, and final response length.
+
+Procedure Budget caps process:
+
+- P0: answer directly with no plan.
+- P1: inspect and fix only the local surface.
+- P2: use a short plan, implementation, and relevant verification.
+- P3: use structure for review, audit, research, design, product, and architecture work.
+- P4: ask first and stage high-risk or hard-to-reverse work.
+
+Tool Budget caps evidence-gathering:
+
+- T0: no tools for stable direct answers.
+- T1: read the smallest relevant local context.
+- T2: make bounded changes and run narrow checks.
+- T3: use runtime, visual, current-source, or asset tools only when fidelity requires them.
+- T4: request confirmation for privileged, destructive, expensive, or broad actions.
+
+Do not use tools for confidence theater. Do not verify everything; verify the touched surface.
+
 ## Depth Gate: L0-L4
 
-`fable-mode` helps Codex avoid treating every task as a heavy project. The first decision is the smallest sufficient reasoning depth.
+After the output lock, `fable-mode` chooses the smallest sufficient reasoning depth.
 
 - L0: answer simple questions directly.
 - L1: inspect the smallest relevant area for small bugs or CSS issues.
@@ -329,12 +370,15 @@ fable-mode can guide better decisions, but it cannot invent unavailable runtime 
 plugins/fable-mode/.codex-plugin/plugin.json
 plugins/fable-mode/skills/fable-mode/SKILL.md
 plugins/fable-mode/skills/fable-mode/references/intent-framing.md
+plugins/fable-mode/skills/fable-mode/references/output-lock.md
 plugins/fable-mode/skills/fable-mode/references/depth-gate.md
+plugins/fable-mode/skills/fable-mode/references/procedure-budget.md
 plugins/fable-mode/skills/fable-mode/references/constraint-integrity.md
 plugins/fable-mode/skills/fable-mode/references/ask-or-act.md
 plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 plugins/fable-mode/skills/fable-mode/references/capability-fit.md
+plugins/fable-mode/skills/fable-mode/references/tool-budget.md
 plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
 plugins/fable-mode/skills/fable-mode/references/output-archetype.md

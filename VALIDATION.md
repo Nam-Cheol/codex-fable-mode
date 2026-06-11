@@ -57,12 +57,15 @@ Expected result: the command prints `skill-frontmatter-ok`.
 
 ```bash
 test -f plugins/fable-mode/skills/fable-mode/SKILL.md
+test -f plugins/fable-mode/skills/fable-mode/references/output-lock.md
 test -f plugins/fable-mode/skills/fable-mode/references/depth-gate.md
+test -f plugins/fable-mode/skills/fable-mode/references/procedure-budget.md
 test -f plugins/fable-mode/skills/fable-mode/references/constraint-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/ask-or-act.md
 test -f plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/capability-fit.md
+test -f plugins/fable-mode/skills/fable-mode/references/tool-budget.md
 test -f plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 test -f plugins/fable-mode/skills/fable-mode/references/output-archetype.md
 test -f plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
@@ -102,12 +105,15 @@ Expected result: no output.
 
 ```bash
 test -f plugins/fable-mode/skills/fable-mode/references/intent-framing.md
+test -f plugins/fable-mode/skills/fable-mode/references/output-lock.md
 test -f plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
 test -f plugins/fable-mode/skills/fable-mode/references/small-fix-protocol.md
+test -f plugins/fable-mode/skills/fable-mode/references/procedure-budget.md
 test -f plugins/fable-mode/skills/fable-mode/references/constraint-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/capability-fit.md
+test -f plugins/fable-mode/skills/fable-mode/references/tool-budget.md
 test -f plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 test -f plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
 test -f plugins/fable-mode/skills/fable-mode/references/design-thinking.md
