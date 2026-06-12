@@ -1,7 +1,7 @@
 {
   "name": "fable-mode",
-  "version": "0.2.0",
-  "description": "A documentation-only Codex plugin that adds one reusable skill for intent-aware work, constraint integrity, grounding checks, capability fit, verification-first implementation, and concise reporting.",
+  "version": "0.2.1",
+  "description": "A documentation-only Codex plugin that adds one explicit $fable-mode skill for intent, output-form, grounding, capability, and depth control.",
   "author": {
     "name": "Namba"
   },
@@ -30,8 +30,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Fable Mode",
-    "shortDescription": "Use one careful Codex workflow for intent-aware work",
-    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for deliberate task framing, constraint integrity, output-form selection, grounding checks, capability fit, audience-aware response shaping, engineering implementation, verification-first delivery, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, dependencies, or telemetry.",
+    "shortDescription": "Explicit $fable-mode routing for careful tasks",
+    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for explicit task framing, output-form selection, grounding stop gates, capability stop gates, depth control, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, dependencies, or telemetry.",
     "developerName": "Namba",
     "category": "Developer Tools",
     "capabilities": [

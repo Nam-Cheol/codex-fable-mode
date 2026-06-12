@@ -4,7 +4,7 @@
 
 [![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#한계)
 [![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#명령어로-설치하기-codex-cli)
-[![Version v0.2.0](https://img.shields.io/badge/version-v0.2.0-6b7280)](#버전-운영)
+[![Version v0.2.1](https://img.shields.io/badge/version-v0.2.1-6b7280)](#버전-운영)
 [![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#한계)
 
 [English README](./README.en.md)
@@ -42,7 +42,7 @@ flowchart LR
     D --> E["Procedure budget"]
     E --> F["Constraints"]
     F --> G["Ask or act"]
-    G --> H["Grounding and capability"]
+    G --> H["Grounding/capability stop gates"]
     H --> I["Tool budget"]
     I --> J["Audit only if required"]
     J --> K["Implement or answer"]
@@ -203,7 +203,7 @@ $fable-mode 이 화면을 제품 목적과 브랜드 기준에 맞게 다시 설
 $fable-mode 이 요청은 웹페이지가 아니라 조작 가능한 시뮬레이터야. HTML을 쓰더라도 dashboard처럼 만들지 말고 매체를 먼저 판단해줘.
 ```
 
-Codex는 계획, 코드 리뷰, 아키텍처, 디버깅, 신중한 구현, UI/프론트엔드 디자인 작업에서 이 스킬을 자동으로 참고할 수도 있습니다.
+기본 사용 방식은 명시 호출입니다. 이 스킬은 `agents/openai.yaml`에서 implicit invocation을 꺼 두었기 때문에, 보통은 `$fable-mode`로 직접 불렀을 때 작동합니다.
 
 도메인별 프롬프트는 [TEST_PROMPTS.md](./TEST_PROMPTS.md)에 평가 예시로만 둡니다. 그 예시들은 fable-mode의 내장 편향이나 core routing이 아닙니다.
 
@@ -309,6 +309,8 @@ fable-mode는 결과물을 자동으로 webpage로 보지 않습니다.
 
 사용자가 실제 파일, 현재 정보, 재현 가능한 버그, 측정값, 브랜드 기준, 디자인 시스템, 시각 자산, 정확한 근거를 요구하면 fable-mode는 그 요구를 그럴듯한 근사치로 조용히 대체하지 않도록 안내합니다.
 
+이 요구가 hard requirement라면 stop gate입니다. 필요한 근거, 자산, 측정, 재현, runtime, browser, 현재 정보 조회 같은 역량이 없으면 구현으로 들어가지 않습니다. 가능한 도구로 확인하거나, 사용자에게 필요한 자료를 묻거나, 제한된 답변/계획으로 output lock을 바꿉니다.
+
 필요한 도구가 있으면 사용하고, 현재 환경에서 불가능하면 불가능하다고 말합니다. 그때는 지금 검증된 것, 추론한 것, 막힌 것, 더 정확한 결과를 위해 필요한 자산이나 도구를 분리해야 합니다.
 
 ## 수동 검증
@@ -366,6 +368,7 @@ codex plugin marketplace remove codex-fable-mode
 .agents/plugins/marketplace.json
 plugins/fable-mode/.codex-plugin/plugin.json
 plugins/fable-mode/skills/fable-mode/SKILL.md
+plugins/fable-mode/skills/fable-mode/agents/openai.yaml
 plugins/fable-mode/skills/fable-mode/references/intent-framing.md
 plugins/fable-mode/skills/fable-mode/references/output-lock.md
 plugins/fable-mode/skills/fable-mode/references/depth-gate.md

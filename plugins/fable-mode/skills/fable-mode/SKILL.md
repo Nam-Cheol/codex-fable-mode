@@ -1,6 +1,6 @@
 ---
 name: fable-mode
-description: Use when the user wants intent-aware implementation, debugging, review, architecture, UI/design work, or careful problem solving. This skill chooses the smallest sufficient reasoning depth instead of forcing every task into a heavy process.
+description: Use when the user explicitly invokes $fable-mode or asks for fable-mode style routing. Keep ordinary simple tasks outside this skill; it is for intent, output-form, grounding, capability, and depth control.
 ---
 
 # fable-mode
@@ -36,7 +36,11 @@ Before planning, using tools, or acting:
 14. Run a compact pre-final critique.
 15. Report only what matters.
 
+This is a routing loop, not a requirement to read every reference file.
+
 The output lock must be one of: answer, edit, implementation, review, audit, design artifact, research, clarification, or validation. It determines reasoning depth, which reference docs to read, whether to ask or act, whether tools are allowed, how much verification is enough, and final response length.
+
+Grounding and capability checks are stop gates when they protect a hard requirement. If a required source, asset, measurement, reproduction, runtime, browser, current lookup, or other capability is unavailable, do not enter implementation by substituting a plausible approximation. Stop, inspect with an available tool, ask for the missing material, or change the output to a clearly limited answer or plan.
 
 ## Routing order
 
@@ -60,24 +64,26 @@ Use this order for substantial work:
 
 ## Reference order
 
-Before planning or tool use, apply these first:
+Before planning or tool use, apply the minimal entry set:
 
 - [intent-framing.md](references/intent-framing.md)
 - [output-lock.md](references/output-lock.md)
-
-Then continue through only as much of the routing layer as the output lock and risk require:
-
 - [depth-gate.md](references/depth-gate.md)
-- [procedure-budget.md](references/procedure-budget.md)
-- [constraint-integrity.md](references/constraint-integrity.md)
-- [ask-or-act.md](references/ask-or-act.md)
-- [output-form-integrity.md](references/output-form-integrity.md)
-- [grounding-integrity.md](references/grounding-integrity.md)
-- [capability-fit.md](references/capability-fit.md)
-- [tool-budget.md](references/tool-budget.md)
-- [audience-intent.md](references/audience-intent.md)
 
-The output lock decides which later reference docs to read. Do not read every reference file by default.
+Then load only the monitor files triggered by the locked output, explicit constraints, grounding needs, capability needs, risk, or requested artifact:
+
+- [procedure-budget.md](references/procedure-budget.md): when the task could sprawl, has multiple steps, or needs verification.
+- [constraint-integrity.md](references/constraint-integrity.md): when the user gives explicit scope, wording, file, safety, or fidelity constraints.
+- [ask-or-act.md](references/ask-or-act.md): when missing information might change the result.
+- [output-form-integrity.md](references/output-form-integrity.md): when the requested artifact could be confused with a familiar implementation tool.
+- [grounding-integrity.md](references/grounding-integrity.md): when the answer or artifact depends on sources, assets, measurements, current facts, reproduction, brand, design-system, codebase, or other evidence.
+- [capability-fit.md](references/capability-fit.md): when correctness or fidelity depends on a tool, permission, runtime, browser, external source, image, dataset, or other capability.
+- [tool-budget.md](references/tool-budget.md): when tools are being used or considered.
+- [audience-intent.md](references/audience-intent.md): when the user names an audience, reading level, domain, or delivery context.
+
+The output lock and depth gate decide which later reference docs to read. Do not read every reference file by default.
+
+Monitor files are not a second checklist. They are small, conditional guardrails. Grounding and capability monitors become hard stops when their missing evidence or missing tool would make implementation dishonest.
 
 For ambiguous, product, architecture, design, or high-risk work, also read:
 
@@ -93,7 +99,7 @@ For localized CSS, JS, layout, interaction, or bug fixes, prefer:
 
 - [small-fix-protocol.md](references/small-fix-protocol.md)
 
-Before finishing, follow:
+Before finishing substantial work, apply a compact critique and final-shape check. Read these files only when the task is large enough that the extra guardrail helps:
 
 - [pre-final-critique.md](references/pre-final-critique.md)
 - [final-response.md](references/final-response.md)

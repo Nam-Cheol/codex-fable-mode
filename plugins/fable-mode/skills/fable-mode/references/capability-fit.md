@@ -29,6 +29,27 @@ Examples:
 - visual fidelity may require assets, screenshots, image generation, or references
 - full automation may require runtime tools that are not always available
 
+## Capability stop
+
+A missing capability blocks implementation when the user's hard requirement cannot be satisfied without it.
+
+Stop before implementing when the request requires a capability you do not have or cannot use, such as:
+
+- browser or visual inspection for a visual-fidelity claim
+- runtime execution for interactive behavior
+- measurements for performance improvement claims
+- current lookup for unstable facts
+- source files, logs, screenshots, datasets, credentials, or fixtures that are not available
+- permission to write, install, call external services, or perform destructive work
+
+Do not downgrade the result silently. Continue only when:
+
+- an available alternative capability can satisfy the same requirement
+- the user accepts a lower-fidelity or partial result
+- the output changes to a limitation report, question, validation plan, or scoped next step
+
+If the capability stop triggers, separate the blocker from any work that remains safe and honest.
+
 ## When a capability is unavailable
 
 Do not pretend.

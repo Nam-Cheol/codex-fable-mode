@@ -53,10 +53,20 @@ PY
 
 Expected result: the command prints `skill-frontmatter-ok`.
 
+## Skill Invocation Policy
+
+```bash
+test -f plugins/fable-mode/skills/fable-mode/agents/openai.yaml
+rg -n "allow_implicit_invocation: false" plugins/fable-mode/skills/fable-mode/agents/openai.yaml
+```
+
+Expected result: the metadata file exists and the policy line is printed.
+
 ## Required Skill Files
 
 ```bash
 test -f plugins/fable-mode/skills/fable-mode/SKILL.md
+test -f plugins/fable-mode/skills/fable-mode/agents/openai.yaml
 test -f plugins/fable-mode/skills/fable-mode/references/output-lock.md
 test -f plugins/fable-mode/skills/fable-mode/references/depth-gate.md
 test -f plugins/fable-mode/skills/fable-mode/references/procedure-budget.md

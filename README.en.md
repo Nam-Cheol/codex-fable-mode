@@ -4,7 +4,7 @@
 
 [![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#limitations)
 [![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#install-with-commands)
-[![Version v0.2.0](https://img.shields.io/badge/version-v0.2.0-6b7280)](#version-policy)
+[![Version v0.2.1](https://img.shields.io/badge/version-v0.2.1-6b7280)](#version-policy)
 [![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#limitations)
 
 [한국어 README](./README.md)
@@ -44,7 +44,7 @@ flowchart LR
     D --> E["Procedure budget"]
     E --> F["Constraints"]
     F --> G["Ask or act"]
-    G --> H["Grounding and capability"]
+    G --> H["Grounding/capability stop gates"]
     H --> I["Tool budget"]
     I --> J["Audit only if required"]
     J --> K["Implement or answer"]
@@ -206,7 +206,7 @@ Output-form sensitive work:
 $fable-mode This should be an interactive simulator, not a webpage. Even if you use HTML, choose the medium before building it like a dashboard.
 ```
 
-Codex may also use this skill implicitly for planning, code review, architecture, debugging, careful implementation, and UI/frontend design tasks.
+The default usage pattern is explicit invocation. This skill disables implicit invocation in `agents/openai.yaml`, so it should normally run when you call `$fable-mode` directly.
 
 Domain-specific prompts live in [TEST_PROMPTS.md](./TEST_PROMPTS.md) as evaluation examples only. They are not built-in bias or core routing logic.
 
@@ -312,6 +312,8 @@ This reduces generic card/grid implementations for tools that need a real work s
 
 When the user asks for actual files, current facts, reproducible bugs, measurements, brand constraints, design systems, visual assets, or exact evidence, fable-mode guides Codex not to silently replace that with a plausible approximation.
 
+When that evidence is a hard requirement, it is a stop gate. If the needed source, asset, measurement, reproduction, runtime, browser, current lookup, or other capability is unavailable, do not enter implementation. Inspect with an available tool, ask for the missing material, or change the output lock to a limited answer or plan.
+
 If the needed capability is available, use it. If the current environment cannot provide the needed evidence or tool, say so. Separate what was verified, what was inferred, what is blocked, and what would be needed for a higher-fidelity result.
 
 ## Manual Validation
@@ -369,6 +371,7 @@ fable-mode can guide better decisions, but it cannot invent unavailable runtime 
 .agents/plugins/marketplace.json
 plugins/fable-mode/.codex-plugin/plugin.json
 plugins/fable-mode/skills/fable-mode/SKILL.md
+plugins/fable-mode/skills/fable-mode/agents/openai.yaml
 plugins/fable-mode/skills/fable-mode/references/intent-framing.md
 plugins/fable-mode/skills/fable-mode/references/output-lock.md
 plugins/fable-mode/skills/fable-mode/references/depth-gate.md
