@@ -33,6 +33,31 @@ PY
 
 Expected result: the command prints `defaultPrompt-ok`.
 
+## Metadata Alignment
+
+```bash
+python3 - <<'PY'
+import json
+
+p = "plugins/fable-mode/.codex-plugin/plugin.json"
+with open(p, encoding="utf-8") as f:
+    data = json.load(f)
+
+keywords = set(data.get("keywords", []))
+for keyword in ["output-lock", "procedure-budget", "tool-budget"]:
+    assert keyword in keywords, f"missing keyword: {keyword}"
+
+assert data["interface"].get("defaultPrompt") == [
+    "Use $fable-mode to lock output type before planning.",
+    "Use $fable-mode to fix this without over-scoping.",
+    "Use $fable-mode to cap tools and verify only the touched surface.",
+]
+print("metadata-alignment-ok")
+PY
+```
+
+Expected result: the command prints `metadata-alignment-ok`.
+
 ## Skill Frontmatter
 
 ```bash

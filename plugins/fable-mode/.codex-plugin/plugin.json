@@ -13,6 +13,9 @@
     "skill",
     "workflow",
     "planning",
+    "output-lock",
+    "procedure-budget",
+    "tool-budget",
     "code-review",
     "debugging",
     "design-thinking",
@@ -38,9 +41,9 @@
       "Guidance"
     ],
     "defaultPrompt": [
-      "Use $fable-mode to choose the right reasoning depth.",
+      "Use $fable-mode to lock output type before planning.",
       "Use $fable-mode to fix this without over-scoping.",
-      "Use $fable-mode to keep constraints, output form, and grounding honest."
+      "Use $fable-mode to cap tools and verify only the touched surface."
     ]
   }
 }

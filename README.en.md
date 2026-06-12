@@ -113,13 +113,13 @@ codex plugin add fable-mode@codex-fable-mode
 </details>
 
 <details>
-<summary>Example fixed tagged version: v0.1.0</summary>
+<summary>Example fixed tagged version: v0.2.1</summary>
 
 Use this when you need to reinstall the exact same version later, or when a team document must pin the plugin version. The example below uses an already tagged version.
 
 ```bash
 # 1. Paste this line, then press Enter.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.2.1
 
 # 2. When the first command finishes, paste this line and press Enter.
 codex plugin add fable-mode@codex-fable-mode
@@ -324,7 +324,7 @@ This repository is intentionally documentation-only, so it does not add a valida
 
 The default install uses `--ref main`. This plugin is not runtime code; it is the currently recommended reasoning workflow documentation, so most users should receive the latest guidance when they upgrade.
 
-For team docs or reproducible installs, pin a tag such as `--ref v0.1.x`. Small wording edits may keep the same `plugin.json.version`, but changes to the default behavior philosophy, reference structure, install flow, or UI metadata should bump the patch or minor version.
+For team docs or reproducible installs, pin a tag such as `--ref v0.2.1`. Small wording edits may keep the same `plugin.json.version`, but changes to the default behavior philosophy, reference structure, install flow, or UI metadata should bump the patch or minor version.
 
 ## Update
 

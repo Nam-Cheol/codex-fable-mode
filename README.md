@@ -110,13 +110,13 @@ codex plugin add fable-mode@codex-fable-mode
 </details>
 
 <details>
-<summary>이미 태그된 고정 버전 예시(v0.1.0)</summary>
+<summary>이미 태그된 고정 버전 예시(v0.2.1)</summary>
 
 나중에도 같은 버전을 다시 설치해야 하거나, 팀 문서에서 정확한 버전을 맞춰야 한다면 태그에 고정해서 설치하세요. 아래는 이미 태그된 버전을 쓰는 예시입니다.
 
 ```bash
 # 1. 이 줄을 붙여넣고 Enter를 누릅니다.
-codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.1.0
+codex plugin marketplace add Nam-Cheol/codex-fable-mode --ref v0.2.1
 
 # 2. 위 명령이 끝나면, 이 줄을 붙여넣고 Enter를 누릅니다.
 codex plugin add fable-mode@codex-fable-mode
@@ -321,7 +321,7 @@ fable-mode는 결과물을 자동으로 webpage로 보지 않습니다.
 
 기본 설치는 `--ref main`을 사용합니다. 이 플러그인은 실행 코드가 아니라 현재 권장 사고 워크플로 문서이므로, 일반 사용자는 업데이트할 때 최신 문서를 받는 편이 자연스럽습니다.
 
-팀 문서나 재현 가능한 설치가 필요하면 `--ref v0.1.x`처럼 태그에 고정하세요. 짧은 문구 수정은 `plugin.json.version`을 유지할 수 있지만, 기본 동작 철학, reference 구조, 설치 방식, UI metadata가 바뀌면 patch 또는 minor version을 올립니다.
+팀 문서나 재현 가능한 설치가 필요하면 `--ref v0.2.1`처럼 태그에 고정하세요. 짧은 문구 수정은 `plugin.json.version`을 유지할 수 있지만, 기본 동작 철학, reference 구조, 설치 방식, UI metadata가 바뀌면 patch 또는 minor version을 올립니다.
 
 ## 업데이트
 

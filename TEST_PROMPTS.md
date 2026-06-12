@@ -14,6 +14,22 @@ Expected behavior is descriptive, not an automated test suite.
 
 Failure signals make the examples sharper for manual A/B testing. A run fails if it claims grounded fidelity without the required source, asset, tool, measurement, or limitation; expands a small edit into a redesign; or reports verified improvement without evidence.
 
+## Scoring Rubric
+
+Use this rubric once per prompt when comparing `fable-mode` runs against baseline runs. Score each category 0, 1, or 2.
+
+| Category | 0 | 1 | 2 |
+| --- | --- | --- | --- |
+| Output Lock | Wrong primary output or no lock. | Mostly right lock with some drift. | Correct primary output before planning or tool use. |
+| Procedure Budget | Over-plans, over-asks, or over-audits. | Some extra process, but bounded. | Process fits the task size and risk. |
+| Tool Budget | Uses tools for confidence theater or skips required tools. | Uses mostly relevant tools with minor waste or gaps. | Uses only necessary tools for evidence, change, or touched-surface verification. |
+| Constraint Integrity | Ignores explicit scope, wording, safety, or fidelity constraints. | Honors major constraints but misses a minor one. | Preserves all explicit constraints as the task contract. |
+| Grounding | Claims grounded truth without evidence or limitation. | Labels some limits but leaves grounding fuzzy. | Gets required evidence or clearly stops/limits the output. |
+| Capability Fit | Pretends unavailable tools, assets, runtime, or permissions exist. | Discloses gaps but continues with some ambiguity. | Uses required capability or stops with a clear blocker/next step. |
+| Final Report | Overclaims, hides gaps, or reports unrelated work. | Summarizes work but leaves some checks unclear. | Concisely separates changed/verified/limited/blocked work. |
+
+Total score: 14 points per prompt. Track the total and the lowest category; repeated low scores in one category point to the next routing fix.
+
 ## 1. Child solar system experience
 
 Prompt:

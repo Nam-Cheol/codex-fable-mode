@@ -49,6 +49,7 @@ Use only when the user asked for it or the task cannot be completed safely other
 
 ## Tool rules
 
+- Tool budget never overrides system, developer, safety, or platform requirements. If a higher-priority instruction requires a tool, treat that tool as necessary and keep the rest of the budget narrow.
 - Do not use tools for confidence theater.
 - Do not run broad discovery after the lock has already bounded the surface.
 - Do not verify everything; verify the touched surface.
