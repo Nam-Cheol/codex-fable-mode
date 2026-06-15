@@ -44,13 +44,13 @@ with open(p, encoding="utf-8") as f:
     data = json.load(f)
 
 keywords = set(data.get("keywords", []))
-for keyword in ["output-lock", "procedure-budget", "tool-budget"]:
+for keyword in ["output-lock", "visible-route-contract", "procedure-budget", "tool-budget", "delegation-budget"]:
     assert keyword in keywords, f"missing keyword: {keyword}"
 
 assert data["interface"].get("defaultPrompt") == [
-    "Use $fable-mode to lock output type before planning.",
+    "Use $fable-mode to lock output type and expose route when warranted.",
     "Use $fable-mode to fix this without over-scoping.",
-    "Use $fable-mode to cap tools and verify only the touched surface.",
+    "Use $fable-mode to cap tools, delegation, and verification.",
 ]
 print("metadata-alignment-ok")
 PY
@@ -101,7 +101,25 @@ test -f plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/capability-fit.md
 test -f plugins/fable-mode/skills/fable-mode/references/tool-budget.md
+test -f plugins/fable-mode/skills/fable-mode/references/delegation-budget.md
+test -f plugins/fable-mode/skills/fable-mode/references/visible-route-contract.md
 test -f plugins/fable-mode/skills/fable-mode/references/audience-intent.md
+test -f plugins/fable-mode/skills/fable-mode/references/run-card.md
+test -f plugins/fable-mode/skills/fable-mode/references/investigation-protocol.md
+test -f plugins/fable-mode/skills/fable-mode/references/verification-gate.md
+test -f plugins/fable-mode/skills/fable-mode/references/behavioral-evaluation.md
+test -f plugins/fable-mode/skills/fable-mode/examples/l0-route-omission.md
+test -f plugins/fable-mode/skills/fable-mode/examples/l2-implementation-route.md
+test -f plugins/fable-mode/skills/fable-mode/examples/l3-design-route.md
+test -f plugins/fable-mode/skills/fable-mode/examples/a1-debugging.md
+test -f plugins/fable-mode/skills/fable-mode/examples/a2-review.md
+test -f plugins/fable-mode/skills/fable-mode/evals/over-scope.md
+test -f plugins/fable-mode/skills/fable-mode/evals/output-drift.md
+test -f plugins/fable-mode/skills/fable-mode/evals/tool-bloat.md
+test -f plugins/fable-mode/skills/fable-mode/evals/grounding-stop-gate.md
+test -f plugins/fable-mode/skills/fable-mode/evals/route-disclosure.md
+test -f plugins/fable-mode/skills/fable-mode/evals/delegation-budget.md
+test -f plugins/fable-mode/skills/fable-mode/evals/renderable-verification.md
 test -f plugins/fable-mode/skills/fable-mode/references/output-archetype.md
 test -f plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
 test -f plugins/fable-mode/skills/fable-mode/references/substrate-selection.md
@@ -136,6 +154,14 @@ find plugins/fable-mode -name hooks -o -name ".mcp.json" -o -name ".app.json" -o
 
 Expected result: no output.
 
+## Provider-Neutral Documentation Boundary
+
+```bash
+rg -n "Fable 5 clone|not a Fable clone|provider bridge|API gateway|LiteLLM|goal engine|planner engine|router service|automatic subagent framework|documentation-only" README.md README.en.md plugins/fable-mode/skills/fable-mode/SKILL.md plugins/fable-mode/skills/fable-mode/references
+```
+
+Expected result: printed lines are boundary language only. They must describe what the plugin is not, not imply implementation, replication, bridging, unlocking, telemetry, hooks, runtime behavior, or automatic subagent execution.
+
 ## Optional Full File Check
 
 ```bash
@@ -149,6 +175,8 @@ test -f plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 test -f plugins/fable-mode/skills/fable-mode/references/capability-fit.md
 test -f plugins/fable-mode/skills/fable-mode/references/tool-budget.md
+test -f plugins/fable-mode/skills/fable-mode/references/delegation-budget.md
+test -f plugins/fable-mode/skills/fable-mode/references/visible-route-contract.md
 test -f plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 test -f plugins/fable-mode/skills/fable-mode/references/pre-final-critique.md
 test -f plugins/fable-mode/skills/fable-mode/references/design-thinking.md
@@ -160,6 +188,10 @@ test -f plugins/fable-mode/skills/fable-mode/references/safety-boundaries.md
 test -f plugins/fable-mode/skills/fable-mode/references/design-anti-patterns.md
 test -f plugins/fable-mode/skills/fable-mode/references/design-exploration.md
 test -f plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md
+test -f plugins/fable-mode/skills/fable-mode/references/run-card.md
+test -f plugins/fable-mode/skills/fable-mode/references/investigation-protocol.md
+test -f plugins/fable-mode/skills/fable-mode/references/verification-gate.md
+test -f plugins/fable-mode/skills/fable-mode/references/behavioral-evaluation.md
 ```
 
 Expected result: each command exits successfully.

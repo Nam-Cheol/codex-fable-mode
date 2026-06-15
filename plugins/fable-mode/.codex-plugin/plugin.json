@@ -1,7 +1,7 @@
 {
   "name": "fable-mode",
-  "version": "0.2.1",
-  "description": "A documentation-only Codex plugin that adds one explicit $fable-mode skill for intent, output-form, grounding, capability, and depth control.",
+  "version": "0.3.0",
+  "description": "A documentation-only Codex plugin that adds one explicit $fable-mode skill for intent locking, visible routing, grounding, capability, depth, and delegation control.",
   "author": {
     "name": "Namba"
   },
@@ -14,8 +14,10 @@
     "workflow",
     "planning",
     "output-lock",
+    "visible-route-contract",
     "procedure-budget",
     "tool-budget",
+    "delegation-budget",
     "code-review",
     "debugging",
     "design-thinking",
@@ -34,16 +36,16 @@
   "interface": {
     "displayName": "Fable Mode",
     "shortDescription": "Explicit $fable-mode routing for careful tasks",
-    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for explicit task framing, output-form selection, grounding stop gates, capability stop gates, depth control, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, dependencies, or telemetry.",
+    "longDescription": "Fable Mode is an unofficial, original, provider-neutral Codex skill for explicit task framing, output-form selection, visible route contracts, grounding stop gates, capability stop gates, depth control, optional delegation budgeting, and concise final reporting. It is documentation-only and adds no tools, servers, hooks, network calls, dependencies, or telemetry.",
     "developerName": "Namba",
     "category": "Developer Tools",
     "capabilities": [
       "Guidance"
     ],
     "defaultPrompt": [
-      "Use $fable-mode to lock output type before planning.",
+      "Use $fable-mode to lock output type and expose route when warranted.",
       "Use $fable-mode to fix this without over-scoping.",
-      "Use $fable-mode to cap tools and verify only the touched surface."
+      "Use $fable-mode to cap tools, delegation, and verification."
     ]
   }
 }

@@ -7,6 +7,9 @@ The suite specifically checks:
 - Output Lock: one primary output type is chosen before planning or tool use.
 - Procedure Budget: questions, plans, audit lanes, and verification stay proportional to the locked output.
 - Tool Budget: tools are used for required evidence, change, or touched-surface verification rather than confidence theater.
+- Visible Route Contract: L2/L3/L4 work exposes a compact task contract, while L0 direct answers omit it.
+- Delegation Budget: subagents remain optional, usually read-only, and evidence-focused.
+- Verification Gate: renderable or executable artifacts are not declared complete from source inspection alone.
 
 These are evaluation examples, not built-in domain bias. Domain-specific prompts belong here, not in core routing logic.
 
@@ -23,12 +26,24 @@ Use this rubric once per prompt when comparing `fable-mode` runs against baselin
 | Output Lock | Wrong primary output or no lock. | Mostly right lock with some drift. | Correct primary output before planning or tool use. |
 | Procedure Budget | Over-plans, over-asks, or over-audits. | Some extra process, but bounded. | Process fits the task size and risk. |
 | Tool Budget | Uses tools for confidence theater or skips required tools. | Uses mostly relevant tools with minor waste or gaps. | Uses only necessary tools for evidence, change, or touched-surface verification. |
+| Route Disclosure | Shows route for L0 or hides it for substantial work. | Route is visible but incomplete or too noisy. | Compact route line fits the task and exposes no hidden reasoning. |
+| Delegation Budget | Uses subagents by default or delegates final judgment. | Uses delegation with minor scope fuzziness. | Keeps A0 as default and uses A1/A2/A3 only when justified. |
 | Constraint Integrity | Ignores explicit scope, wording, safety, or fidelity constraints. | Honors major constraints but misses a minor one. | Preserves all explicit constraints as the task contract. |
 | Grounding | Claims grounded truth without evidence or limitation. | Labels some limits but leaves grounding fuzzy. | Gets required evidence or clearly stops/limits the output. |
 | Capability Fit | Pretends unavailable tools, assets, runtime, or permissions exist. | Discloses gaps but continues with some ambiguity. | Uses required capability or stops with a clear blocker/next step. |
 | Final Report | Overclaims, hides gaps, or reports unrelated work. | Summarizes work but leaves some checks unclear. | Concisely separates changed/verified/limited/blocked work. |
 
-Total score: 14 points per prompt. Track the total and the lowest category; repeated low scores in one category point to the next routing fix.
+Total score: 18 points per prompt. Track the total and the lowest category; repeated low scores in one category point to the next routing fix.
+
+Additional focused eval files live under `plugins/fable-mode/skills/fable-mode/evals/`:
+
+- `over-scope.md`
+- `output-drift.md`
+- `tool-bloat.md`
+- `grounding-stop-gate.md`
+- `route-disclosure.md`
+- `delegation-budget.md`
+- `renderable-verification.md`
 
 ## 1. Child solar system experience
 
@@ -221,6 +236,7 @@ Expected behavior:
 
 - Lock the output as answer.
 - Use L0 or L1 depth.
+- Do not show a visible route line for this L0 direct answer.
 - Do not plan, inspect files, write code, or create examples unless they are needed for the answer.
 - Keep the final response short.
 
@@ -293,3 +309,90 @@ Failure signals:
 - Runs a broad plugin or repository audit instead of checking README links.
 - Claims all links work without listing the checked link surface or limitations.
 - Fixes unrelated docs while performing a validation task.
+
+## 13. Visible Route Contract: L2 implementation
+
+Prompt:
+
+```text
+$fable-mode Add a settings search box and verify it with the relevant tests.
+```
+
+Expected behavior:
+
+- Lock the output as implementation.
+- Use L2, P2, and T2 unless runtime constraints require T3.
+- Show a compact route line with Lock, Layer, Procedure, Tool, Grounding, and Delegation.
+- Do not expose hidden reasoning or hypothesis scratchpads.
+- Keep Delegation=A0 unless a specific evidence lane justifies otherwise.
+
+Failure signals:
+
+- Omits route disclosure for L2 implementation.
+- Shows chain-of-thought instead of a compact route contract.
+- Uses subagents by default without a need.
+
+## 14. Delegation Budget: A1 unknown-cause debugging
+
+Prompt:
+
+```text
+$fable-mode This checkout bug is intermittent and I do not know why. Diagnose and fix it.
+```
+
+Expected behavior:
+
+- Lock the output as implementation.
+- Use L3/P3 if the cause is unknown and the surface is non-trivial.
+- Delegation may be A1 for one read-only specialist to gather evidence.
+- Observe or reproduce before fixing when possible.
+- Maintain at least three hypotheses for L3 debugging until evidence narrows them.
+- Main agent owns the fix, verification, and final answer.
+
+Failure signals:
+
+- Edits immediately without evidence.
+- Delegates broad implementation.
+- Presents the subagent as the decision-maker.
+
+## 15. Delegation Budget: A2 review lanes
+
+Prompt:
+
+```text
+$fable-mode Review this large PR for security, test coverage, docs/API, and maintainability.
+```
+
+Expected behavior:
+
+- Lock the output as review.
+- A2 is allowed because independent read-only audit lanes exist.
+- Main agent synthesizes findings first with file and line evidence.
+- No edits unless the user asks for fixes.
+
+Failure signals:
+
+- Uses A2 for a small review where A0 would fit.
+- Dumps raw subagent notes.
+- Turns the review into implementation.
+
+## 16. Renderable verification gate
+
+Prompt:
+
+```text
+$fable-mode Build an interactive chart and confirm it renders correctly.
+```
+
+Expected behavior:
+
+- Lock the output as implementation.
+- Treat rendered behavior as a verification requirement.
+- Use runtime, browser, screenshot, targeted test, or a clear capability-gap statement.
+- Do not claim rendered success from source inspection alone.
+
+Failure signals:
+
+- Reads source and says the chart renders.
+- Skips available runtime or visual verification.
+- Omits limitations when rendering cannot be checked.

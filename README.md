@@ -4,16 +4,16 @@
 
 [![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#한계)
 [![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#명령어로-설치하기-codex-cli)
-[![Version v0.2.1](https://img.shields.io/badge/version-v0.2.1-6b7280)](#버전-운영)
+[![Version v0.3.0](https://img.shields.io/badge/version-v0.3.0-6b7280)](#버전-운영)
 [![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#한계)
 
 [English README](./README.en.md)
 
-`fable-mode`는 Codex가 사용자의 의도에 맞춰 산출물 형태, 사고 깊이, 절차, 도구 사용량을 먼저 잠그고 필요한 만큼만 움직이도록 돕는 문서 전용 플러그인입니다.
+`fable-mode`는 Codex가 사용자의 의도에 맞춰 산출물 형태, 사고 깊이, 절차, 도구 사용량, 위임 범위를 먼저 잠그고 필요한 만큼만 움직이도록 돕는 문서 전용 플러그인입니다.
 
-설치되는 스킬은 하나뿐입니다. 사용자는 항상 `$fable-mode`만 호출하면 됩니다. 이 스킬은 하네스도, 두 번째 런타임도, 딱딱한 spec generator도 아닙니다. 단순 질문은 바로 답하고, 작은 수정은 최소한으로 확인해 고치며, 구현 작업은 계획-구현-검증으로 마무리하고, 모호한 제품/디자인/아키텍처 작업은 더 깊게 의도를 잡습니다.
+설치되는 스킬은 하나뿐입니다. 사용자는 항상 `$fable-mode`만 호출하면 됩니다. 이 스킬은 Fable clone도, provider bridge도, 하네스도, 두 번째 런타임도, 딱딱한 spec generator도 아닙니다. `fable-mode`는 Codex가 과대해석하지 않게 하는 intent-locking operating mode입니다. 단순 질문은 바로 답하고, 작은 수정은 최소한으로 확인해 고치며, 구현 작업은 계획-구현-검증으로 마무리하고, 모호한 제품/디자인/아키텍처 작업은 더 깊게 의도를 잡습니다.
 
-현재 라우팅은 특정 주제나 시각 스타일이 아니라 작업 행위 자체를 더 강하게 감시합니다. 어린이/우주/디자인 전용 모드가 아닙니다. 먼저 Output Lock으로 answer, edit, implementation, review, audit, design artifact, research, clarification, validation 중 주 산출물을 잠급니다. 그다음 Procedure Budget과 Tool Budget으로 계획, 질문, 파일 읽기, 검증이 필요한 만큼만 쓰이게 합니다.
+현재 라우팅은 특정 주제나 시각 스타일이 아니라 작업 행위 자체를 더 강하게 감시합니다. 어린이/우주/디자인 전용 모드가 아닙니다. 먼저 Output Lock으로 answer, edit, implementation, review, audit, design artifact, research, clarification, validation 중 주 산출물을 잠급니다. 그다음 Procedure Budget, Tool Budget, Delegation Budget으로 계획, 질문, 파일 읽기, 검증, subagent 사용이 필요한 만큼만 쓰이게 합니다. L2 이상에서는 compact route line으로 사용자가 적용된 작업 계약을 볼 수 있습니다.
 
 [명령어로 설치하기](#명령어로-설치하기-codex-cli) · [Codex Desktop 설치](#codex-desktop-설치) · [사용 방법](#사용-방법) · [검증 보기](#수동-검증)
 
@@ -27,6 +27,8 @@
 | 출력 형식이 흔들리는 작업 | Output Lock으로 answer, edit, implementation, review, audit, design artifact, research, clarification, validation 중 하나를 먼저 잠급니다. |
 | 절차가 커지기 쉬운 작업 | Procedure Budget으로 질문, 계획, audit lane, 검증의 양을 제한합니다. |
 | 도구 사용이 과해지기 쉬운 작업 | Tool Budget으로 필요한 근거와 변경, touched surface 검증까지만 도구를 씁니다. |
+| 적용된 작업 레이어가 궁금한 작업 | Visible Route Contract로 L2 이상 작업의 Lock, Layer, Procedure, Tool, Grounding, Delegation을 짧게 노출합니다. |
+| subagent가 도움이 될 수 있는 작업 | Delegation Budget으로 A0-A3 범위를 정하되 기본값은 A0, read-only evidence lane입니다. |
 | 제품/디자인/아키텍처 | 의도, 산출물 형태, 근거, substrate를 먼저 분류합니다. |
 | 형식이 애매한 작업 | 구현 도구와 실제 산출물 형식을 구분합니다. |
 | 근거가 필요한 작업 | 파일, 자산, 측정, 현재 정보, 레퍼런스가 필요한지 확인합니다. |
@@ -44,8 +46,10 @@ flowchart LR
     F --> G["Ask or act"]
     G --> H["Grounding/capability stop gates"]
     H --> I["Tool budget"]
-    I --> J["Audit only if required"]
-    J --> K["Implement or answer"]
+    I --> J["Delegation budget"]
+    J --> N["Visible route contract"]
+    N --> O["Audit only if required"]
+    O --> K["Implement or answer"]
     K --> L["Pre-final critique"]
     L --> M["짧게 보고"]
 ```
@@ -60,6 +64,8 @@ Codex가 어떻게 깊이를 조절할지 판단하도록 돕습니다.
 - Output Lock은 reasoning depth, 읽을 reference, 질문할지 행동할지, 도구 허용 여부, 충분한 검증 범위, 최종 응답 길이를 정합니다.
 - Procedure Budget은 단순 답변을 구현 작업으로 키우거나 작은 수정을 redesign으로 키우지 못하게 합니다.
 - Tool Budget은 자신감 연출용 도구 사용을 막고, 근거 수집과 touched surface 검증까지만 도구를 쓰게 합니다.
+- Delegation Budget은 subagent 사용을 기본값이 아니라 선택적 evidence-gathering layer로 제한합니다.
+- Visible Route Contract는 L2 이상 작업에서 작업 계약을 짧게 보여 주되 hidden reasoning을 노출하지 않습니다.
 - 단순 질문은 바로 답합니다.
 - 작은 수정은 필요한 범위만 읽고 최소 변경으로 고칩니다.
 - 일반 구현은 짧게 계획하고, 구현하고, 관련 검증을 합니다.
@@ -70,6 +76,8 @@ Codex가 어떻게 깊이를 조절할지 판단하도록 돕습니다.
 - 현재 환경의 도구와 권한으로 가능한 일인지 확인하고, 불가능하면 가장 가까운 정직한 경로를 제안합니다.
 - 사용자가 청중을 지정하면 그 청중에 맞게 깊이, 언어, 상호작용 밀도, 증거 수준을 조절합니다.
 - 위험하거나 되돌리기 어려운 작업은 더 조심스럽게 멈춰 확인합니다.
+- 원인 불명 버그는 먼저 재현/관찰하고, 가설을 구분하는 증거를 모은 뒤 causal path를 고칩니다.
+- UI, 게임, 시뮬레이터, 차트, SVG/canvas/WebGL 같은 실행/렌더 산출물은 소스만 보고 완료를 주장하지 않습니다.
 
 UI나 디자인 작업에서도 결과물이 자동으로 웹페이지라고 가정하지 않습니다. 먼저 output form, grounding, capability fit을 확인한 다음 DOM, CSS layout, canvas, SVG, WebGL, fixed-frame, asset-grounded media, hybrid 중 맞는 substrate를 고릅니다. 이 흐름은 실제 작업면이 필요한 도구를 일반적인 DOM 카드/그리드로 밀어 넣는 일을 줄입니다.
 
@@ -249,6 +257,23 @@ Tool Budget은 도구를 근거, 변경, 검증에만 쓰게 합니다.
 
 도구는 자신감 연출용으로 쓰지 않습니다. 모든 것을 검증하지도 않습니다. 수정했거나 주장한 touched surface를 검증합니다.
 
+Visible Route Contract는 L2/L3/L4 작업에서 사용자가 현재 작업 계약을 볼 수 있게 합니다.
+
+```text
+Fable route: Lock=implementation · Layer=L2 · Procedure=P2 · Tool=T2 · Grounding=repo+tests · Delegation=A0
+```
+
+L0 direct answer에서는 route를 보여주지 않습니다. L1 small edit에서는 파일 수정, 검증, 도구 사용이 있을 때만 선택적으로 보여줍니다. 이 줄은 사고 과정이 아니라 계약입니다.
+
+Delegation Budget은 subagent 사용을 제한합니다.
+
+- A0: no delegation. 기본값입니다.
+- A1: 낯선 코드베이스, 원인 불명 버그, API/문서 확인, 리뷰 보조에 한 명의 read-only specialist를 씁니다.
+- A2: 보안, 테스트, 유지보수성, 문서/API, UI/UX처럼 독립 audit lane이 있을 때 병렬 read-only specialists를 쓸 수 있습니다.
+- A3: 대형 migration 또는 다중 모듈 작업에서만 controlled worker split을 쓰며, 사용자 명시 요청이나 승인이 필요합니다.
+
+main agent는 항상 Output Lock, 사용자 의도, write coordination, 최종 산출물 책임을 가집니다. subagent는 자동 실행 프레임워크가 아니라 context isolation과 evidence separation을 위한 선택지입니다.
+
 ## Depth Gate: L0-L4
 
 Output Lock 이후 `fable-mode`는 가장 작은 충분한 사고 깊이를 고릅니다.
@@ -358,7 +383,7 @@ codex plugin marketplace remove codex-fable-mode
 
 ## 한계
 
-이 플러그인은 문서로 동작 방식을 안내하는 플러그인입니다. 새로운 도구, 자동 실행 스크립트, MCP 서버, 앱 연동, 의존성, postinstall 명령, API 호출 예제, telemetry, 네트워크 동작을 추가하지 않습니다. Codex의 정책, 사용자의 환경 정책, 저장소 지시사항, 도구 권한을 우회하지 않습니다.
+이 플러그인은 문서로 동작 방식을 안내하는 플러그인입니다. 새로운 도구, 자동 실행 스크립트, MCP 서버, 앱 연동, 의존성, postinstall 명령, API 호출 예제, telemetry, 네트워크 동작을 추가하지 않습니다. provider bridge, API gateway, LiteLLM wrapper, hook, goal engine, planner engine, router service, 자동 subagent framework도 아닙니다. Codex의 정책, 사용자의 환경 정책, 저장소 지시사항, 도구 권한을 우회하지 않습니다.
 
 따라서 fable-mode는 더 나은 판단을 안내할 수는 있지만, 현재 환경에 없는 runtime tool을 만들어낼 수는 없습니다. 필요한 파일 읽기, 측정, 브라우징, 이미지 생성, 자산 수집, 외부 연동, 자동화 도구가 없거나 막혀 있다면 그것을 말하고 가능한 범위와 불가능한 범위를 분리해야 합니다.
 
@@ -379,6 +404,8 @@ plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 plugins/fable-mode/skills/fable-mode/references/capability-fit.md
 plugins/fable-mode/skills/fable-mode/references/tool-budget.md
+plugins/fable-mode/skills/fable-mode/references/delegation-budget.md
+plugins/fable-mode/skills/fable-mode/references/visible-route-contract.md
 plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
 plugins/fable-mode/skills/fable-mode/references/output-archetype.md
@@ -394,6 +421,12 @@ plugins/fable-mode/skills/fable-mode/references/safety-boundaries.md
 plugins/fable-mode/skills/fable-mode/references/design-anti-patterns.md
 plugins/fable-mode/skills/fable-mode/references/design-exploration.md
 plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md
+plugins/fable-mode/skills/fable-mode/references/run-card.md
+plugins/fable-mode/skills/fable-mode/references/investigation-protocol.md
+plugins/fable-mode/skills/fable-mode/references/verification-gate.md
+plugins/fable-mode/skills/fable-mode/references/behavioral-evaluation.md
+plugins/fable-mode/skills/fable-mode/examples/
+plugins/fable-mode/skills/fable-mode/evals/
 README.md
 README.en.md
 TEST_PROMPTS.md

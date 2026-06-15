@@ -16,6 +16,8 @@ The purpose of fable-mode is to choose the smallest sufficient reasoning depth a
 
 fable-mode is domain-neutral. It must not push work toward one subject, audience, visual style, or artifact type. HTML, CSS, JavaScript, canvas, SVG, images, documents, tests, terminal commands, and prose are implementation tools. The desired output form comes from the user's intent.
 
+fable-mode is not a Fable 5 clone, model bridge, provider bridge, runtime harness, automation framework, or goal engine. It does not unlock, emulate, proxy, or route to another provider. It is documentation-only guidance for Codex behavior.
+
 ## Core loop
 
 Before planning, using tools, or acting:
@@ -30,17 +32,55 @@ Before planning, using tools, or acting:
 8. Identify grounding requirements.
 9. Check capability fit.
 10. Set a tool budget.
-11. Infer audience intent when the user gives one.
-12. Use audit lanes only when required.
-13. Implement or answer.
-14. Run a compact pre-final critique.
-15. Report only what matters.
+11. Set a delegation budget.
+12. Decide whether to expose a compact route line.
+13. Infer audience intent when the user gives one.
+14. Use audit lanes only when required.
+15. Implement or answer.
+16. Run a compact pre-final critique.
+17. Report only what matters.
 
 This is a routing loop, not a requirement to read every reference file.
 
 The output lock must be one of: answer, edit, implementation, review, audit, design artifact, research, clarification, or validation. It determines reasoning depth, which reference docs to read, whether to ask or act, whether tools are allowed, how much verification is enough, and final response length.
 
 Grounding and capability checks are stop gates when they protect a hard requirement. If a required source, asset, measurement, reproduction, runtime, browser, current lookup, or other capability is unavailable, do not enter implementation by substituting a plausible approximation. Stop, inspect with an available tool, ask for the missing material, or change the output to a clearly limited answer or plan.
+
+## Visible route contract
+
+For L2, L3, and L4 work, expose a compact route line near the start. This is a public work contract, not hidden reasoning or chain-of-thought.
+
+Example:
+
+```text
+Fable route: Lock=implementation · Layer=L2 · Procedure=P2 · Tool=T2 · Grounding=repo+tests · Delegation=A0
+```
+
+Do not expose a route line for L0 direct answers. For L1 small edits, expose it only when file edits, verification, or tool use make the contract useful.
+
+The route line may include:
+
+- Lock
+- Layer
+- Procedure
+- Tool
+- Grounding
+- Delegation
+
+Do not include private deliberation, discarded hypotheses, hidden audit notes, or step-by-step reasoning in the route line.
+
+## Delegation budget
+
+Delegation is optional evidence-gathering, not the default behavior.
+
+The main agent always owns the output lock, user intent, write coordination, final synthesis, and final responsibility.
+
+- A0: no delegation. Default.
+- A1: one read-only specialist for unfamiliar codebase exploration, unknown-cause debugging, API/docs confirmation, or review support.
+- A2: parallel read-only specialists when independent audit lanes exist, such as security, tests, maintainability, docs/API, or UI/UX.
+- A3: controlled worker split for large migrations or multi-module work. Use only when the user explicitly requests or approves it. The parent keeps write coordination and final responsibility.
+
+Subagents are for context isolation, evidence separation, and parallel audit. They should receive one narrow question and return distilled evidence. Avoid write-heavy parallel work. Do not imply that this plugin automatically runs subagents; this is a documentation budget only.
 
 ## Routing order
 
@@ -56,11 +96,13 @@ Use this order for substantial work:
 8. Grounding integrity
 9. Capability fit
 10. Tool budget
-11. Audience intent
-12. Audit lanes only when required
-13. Implementation or answer
-14. Pre-final critique
-15. Final response
+11. Delegation budget
+12. Visible route contract
+13. Audience intent
+14. Audit lanes only when required
+15. Implementation or answer
+16. Pre-final critique
+17. Final response
 
 ## Reference order
 
@@ -79,6 +121,8 @@ Then load only the monitor files triggered by the locked output, explicit constr
 - [grounding-integrity.md](references/grounding-integrity.md): when the answer or artifact depends on sources, assets, measurements, current facts, reproduction, brand, design-system, codebase, or other evidence.
 - [capability-fit.md](references/capability-fit.md): when correctness or fidelity depends on a tool, permission, runtime, browser, external source, image, dataset, or other capability.
 - [tool-budget.md](references/tool-budget.md): when tools are being used or considered.
+- [delegation-budget.md](references/delegation-budget.md): when subagents are being considered or the work has independent evidence lanes.
+- [visible-route-contract.md](references/visible-route-contract.md): when route disclosure is required or useful.
 - [audience-intent.md](references/audience-intent.md): when the user names an audience, reading level, domain, or delivery context.
 
 The output lock and depth gate decide which later reference docs to read. Do not read every reference file by default.
@@ -99,10 +143,23 @@ For localized CSS, JS, layout, interaction, or bug fixes, prefer:
 
 - [small-fix-protocol.md](references/small-fix-protocol.md)
 
+For unknown-cause debugging, behavioral regressions, performance mysteries, or failures where the cause is not already known, also read:
+
+- [investigation-protocol.md](references/investigation-protocol.md)
+
+For UI, games, simulations, charts, SVG/canvas/WebGL, executable artifacts, or any work where runtime/rendered behavior is the deliverable, also read:
+
+- [verification-gate.md](references/verification-gate.md)
+
 Before finishing substantial work, apply a compact critique and final-shape check. Read these files only when the task is large enough that the extra guardrail helps:
 
 - [pre-final-critique.md](references/pre-final-critique.md)
 - [final-response.md](references/final-response.md)
+
+For long L3/L4 tasks, user-visible handoffs, or resumed work where the task contract may drift, use:
+
+- [run-card.md](references/run-card.md)
+- [behavioral-evaluation.md](references/behavioral-evaluation.md)
 
 Existing supporting references may be used after the routing layer when relevant:
 
@@ -148,6 +205,14 @@ Do not confuse an implementation tool with the user's desired output. A design r
 
 Slow down. Use audit lanes. Ask before destructive or expensive changes.
 
+### Unknown-cause debugging
+
+Observe or reproduce before fixing. Keep at least two plausible hypotheses active, or at least three for L3/L4 debugging. Gather evidence that distinguishes hypotheses before changing code. Fix the causal path, then verify the original failure mode and the touched surface.
+
+### Renderable or executable artifacts
+
+Do not claim UI, game, simulation, chart, SVG, canvas, WebGL, or executable behavior is complete from source inspection alone. Use natural-environment observation, targeted runtime/test verification, or explicitly state the capability gap.
+
 ## Critique pass
 
 Before finalizing substantial work, ask:
@@ -161,6 +226,9 @@ Before finalizing substantial work, ask:
 - Did I ask when I should have acted?
 - Did I act when I should have asked?
 - Did I exceed the procedure or tool budget?
+- Did I exceed the delegation budget or imply automatic subagents?
+- Did I expose the route contract when useful without exposing hidden reasoning?
+- Did I verify renderable or executable behavior when the deliverable required it?
 - Did I let a familiar template override the user's actual intent?
 
 Revise the artifact or report the limitation when the critique finds a miss.
@@ -168,6 +236,8 @@ Revise the artifact or report the limitation when the critique finds a miss.
 ## Non-goals
 
 Do not create hooks, scripts, MCP servers, app integrations, telemetry, dependencies, network calls, postinstall commands, runtime automation, or a second skill.
+
+Do not turn fable-mode into a provider bridge, API gateway, LiteLLM wrapper, goal engine, planner engine, router service, telemetry layer, or automatic subagent framework.
 
 Do not inject fable-mode branding into user deliverables unless explicitly requested.
 

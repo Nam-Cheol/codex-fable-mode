@@ -4,16 +4,16 @@
 
 [![Documentation-only plugin](https://img.shields.io/badge/type-documentation--only-2f6f5f)](#limitations)
 [![Codex plugin](https://img.shields.io/badge/Codex-plugin-111827)](#install-with-commands)
-[![Version v0.2.1](https://img.shields.io/badge/version-v0.2.1-6b7280)](#version-policy)
+[![Version v0.3.0](https://img.shields.io/badge/version-v0.3.0-6b7280)](#version-policy)
 [![Provider-neutral](https://img.shields.io/badge/guidance-provider--neutral-4b5563)](#limitations)
 
 [한국어 README](./README.md)
 
-`fable-mode` is a documentation-only Codex plugin that helps Codex lock the requested output type, reasoning depth, procedure, and tool use before doing only as much work as the user's intent requires.
+`fable-mode` is a documentation-only Codex plugin that helps Codex lock the requested output type, reasoning depth, procedure, tool use, and delegation scope before doing only as much work as the user's intent requires.
 
-It installs one skill only. Users always invoke `$fable-mode`. The skill is not a harness, not a second runtime, and not a rigid spec generator. Simple questions should get direct answers, small fixes should use minimal inspection, bounded implementation should plan-implement-verify, and ambiguous product/design/architecture work should slow down enough to frame intent.
+It installs one skill only. Users always invoke `$fable-mode`. The skill is not a Fable clone, provider bridge, harness, second runtime, or rigid spec generator. It is an intent-locking operating mode that helps Codex avoid over-interpreting the request. Simple questions should get direct answers, small fixes should use minimal inspection, bounded implementation should plan-implement-verify, and ambiguous product/design/architecture work should slow down enough to frame intent.
 
-The core idea is an intent-aware output lock: first lock the primary output as answer, edit, implementation, review, audit, design artifact, research, clarification, or validation. Then choose the smallest sufficient reasoning depth, procedure budget, and tool budget for that lock.
+The core idea is an intent-aware output lock: first lock the primary output as answer, edit, implementation, review, audit, design artifact, research, clarification, or validation. Then choose the smallest sufficient reasoning depth, procedure budget, tool budget, and delegation budget for that lock. For L2 and above, a compact route line makes the applied work contract visible to the user.
 
 fable-mode strengthens task-behavior monitoring rather than specializing in one topic or visual style. It is not a kids, design, or space-specific mode. It checks whether explicit constraints were honored, whether the output form was misread, whether required evidence and tools were used, whether insufficiency was disclosed honestly, whether the reasoning depth fit the task, and whether the final result matches the user's intent.
 
@@ -29,6 +29,8 @@ fable-mode strengthens task-behavior monitoring rather than specializing in one 
 | Output drift | Use Output Lock to choose answer, edit, implementation, review, audit, design artifact, research, clarification, or validation before acting. |
 | Process bloat | Use Procedure Budget to cap questions, plans, audit lanes, and verification. |
 | Tool bloat | Use Tool Budget so tools gather evidence, make changes, or verify the touched surface rather than perform confidence theater. |
+| Hidden task routing | Use Visible Route Contract so L2+ work exposes Lock, Layer, Procedure, Tool, Grounding, and Delegation briefly. |
+| Optional subagent help | Use Delegation Budget so subagents stay optional, usually read-only, and evidence-focused. |
 | Product, design, or architecture work | Classify intent, output shape, grounding, and substrate first. |
 | Ambiguous output form | Separate implementation tools from the actual artifact. |
 | Grounded work | Check whether files, assets, measurements, current facts, or references are needed. |
@@ -46,8 +48,10 @@ flowchart LR
     F --> G["Ask or act"]
     G --> H["Grounding/capability stop gates"]
     H --> I["Tool budget"]
-    I --> J["Audit only if required"]
-    J --> K["Implement or answer"]
+    I --> J["Delegation budget"]
+    J --> N["Visible route contract"]
+    N --> O["Audit only if required"]
+    O --> K["Implement or answer"]
     K --> L["Pre-final critique"]
     L --> M["Brief report"]
 ```
@@ -61,6 +65,8 @@ It helps Codex decide how deeply to reason:
 - output lock for answer, edit, implementation, review, audit, design artifact, research, clarification, or validation
 - procedure budget so direct answers do not become implementation projects and small fixes do not become redesigns
 - tool budget so tools are used for evidence, change, and touched-surface verification, not confidence theater
+- delegation budget so subagents stay optional evidence-gathering layers rather than default behavior
+- visible route contract so substantial work exposes the task contract without hidden reasoning
 - L0 direct answer for simple questions
 - L1 small-fix path for local bugs, layout issues, and copy changes
 - L2 plan, implement, and verify for bounded implementation
@@ -71,6 +77,8 @@ It helps Codex decide how deeply to reason:
 - grounding integrity for facts, files, assets, measurements, brand systems, and reproductions
 - capability fit so unavailable tools or evidence are disclosed instead of faked
 - audience intent so the response shape matches the user's target audience when specified
+- reproduce-first debugging for unknown-cause failures
+- runtime or visual verification for renderable and executable artifacts
 
 It also uses an ask-or-act rule: ask only when the missing answer would materially change the result. Otherwise, inspect, implement, verify, and report briefly.
 
@@ -244,6 +252,23 @@ Tool Budget caps evidence-gathering:
 
 Do not use tools for confidence theater. Do not verify everything; verify the touched surface.
 
+Visible Route Contract makes the work contract visible for L2/L3/L4 tasks:
+
+```text
+Fable route: Lock=implementation · Layer=L2 · Procedure=P2 · Tool=T2 · Grounding=repo+tests · Delegation=A0
+```
+
+L0 direct answers should not show a route line. L1 small edits may show it only when file edits, verification, or tool use make the contract useful. The line exposes the contract, not hidden reasoning.
+
+Delegation Budget caps subagent use:
+
+- A0: no delegation. This is the default.
+- A1: one read-only specialist for unfamiliar codebases, unknown-cause bugs, API/docs confirmation, or review support.
+- A2: parallel read-only specialists for independent audit lanes such as security, tests, maintainability, docs/API, or UI/UX.
+- A3: controlled worker split for large migrations or multi-module work, requiring explicit user request or approval.
+
+The main agent always owns Output Lock, user intent, write coordination, final synthesis, and final responsibility. Subagents are optional context-isolation and evidence-separation tools, not an automatic framework.
+
 ## Depth Gate: L0-L4
 
 After the output lock, `fable-mode` chooses the smallest sufficient reasoning depth.
@@ -361,7 +386,7 @@ codex plugin marketplace remove codex-fable-mode
 
 ## Limitations
 
-This is a documentation-only guidance plugin. It does not add tools, hooks, scripts, MCP servers, app integrations, dependencies, postinstall commands, API-calling examples, telemetry, or network behavior. It does not bypass Codex policy, user environment policy, repository instructions, or tool permissions.
+This is a documentation-only guidance plugin. It does not add tools, hooks, scripts, MCP servers, app integrations, dependencies, postinstall commands, API-calling examples, telemetry, or network behavior. It is not a provider bridge, API gateway, LiteLLM wrapper, goal engine, planner engine, router service, or automatic subagent framework. It does not bypass Codex policy, user environment policy, repository instructions, or tool permissions.
 
 fable-mode can guide better decisions, but it cannot invent unavailable runtime tools. If required file access, measurement, browsing, image generation, asset collection, external integrations, or automation tools are unavailable or blocked, it must say so and separate possible work from blocked work.
 
@@ -382,6 +407,8 @@ plugins/fable-mode/skills/fable-mode/references/output-form-integrity.md
 plugins/fable-mode/skills/fable-mode/references/grounding-integrity.md
 plugins/fable-mode/skills/fable-mode/references/capability-fit.md
 plugins/fable-mode/skills/fable-mode/references/tool-budget.md
+plugins/fable-mode/skills/fable-mode/references/delegation-budget.md
+plugins/fable-mode/skills/fable-mode/references/visible-route-contract.md
 plugins/fable-mode/skills/fable-mode/references/audience-intent.md
 plugins/fable-mode/skills/fable-mode/references/audit-lanes.md
 plugins/fable-mode/skills/fable-mode/references/output-archetype.md
@@ -397,6 +424,12 @@ plugins/fable-mode/skills/fable-mode/references/safety-boundaries.md
 plugins/fable-mode/skills/fable-mode/references/design-anti-patterns.md
 plugins/fable-mode/skills/fable-mode/references/design-exploration.md
 plugins/fable-mode/skills/fable-mode/references/design-review-rubric.md
+plugins/fable-mode/skills/fable-mode/references/run-card.md
+plugins/fable-mode/skills/fable-mode/references/investigation-protocol.md
+plugins/fable-mode/skills/fable-mode/references/verification-gate.md
+plugins/fable-mode/skills/fable-mode/references/behavioral-evaluation.md
+plugins/fable-mode/skills/fable-mode/examples/
+plugins/fable-mode/skills/fable-mode/evals/
 README.md
 README.en.md
 TEST_PROMPTS.md
